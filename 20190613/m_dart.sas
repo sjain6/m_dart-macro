@@ -1,4 +1,4 @@
-/********* start of header ******************************************
+/********* start of header ****************************************
 Program Name:  m_dart.sas                                             
 Author:        Kevin Miller (kmiller05)                                           
 Description:   Send dataset to DART staging server to be displayed on DART web portal
@@ -6,7 +6,8 @@ Category:      CP
 Macros called:
 Parameter: 
 Usage:         
-                                                                       
+
+/*adding comment here to describe changes to the sas macro*/
 Change History: 
  2017-06-01 Kevin Miller (kmiller05) Original programmer
  2017-06-07 kmiller05   Updated to create defined erro(r) tables when using fastload to upload to teradata  
