@@ -1,0 +1,1084 @@
+#### start of automatic log check result(s) ####
+   /biometrics/global/testbpgl/m_dart/draft/pd_check_call.log
+   Summary messages:
+      4 instance(s) of search pattern #03:WARNING
+      2 instance(s) of search pattern #11:DOES NOT EXIST
+        w01: SYMBOLGEN:  Macro variable LSTOBS_UR resolves to update comments with "error" and "warning" in them
+        w02: 1182       "update comments with "error" and "warning" in them
+        w03: SYMBOLGEN:  Macro variable LSTOBS_CR resolves to update comments with "error" and "warning" in them
+        w04: 1182       "update comments with "error" and "warning" in them
+##### end of automatic log check result(s) #####
+1                                                          The SAS System                             10:31 Wednesday, June 12, 2019
+
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M4) 
+      Licensed to GILEAD SCIENCES - CONTROL NODE 1, Site 70173328.
+NOTE: This session is executing on the Linux 2.6.32-754.11.1.el6.x86_64 (LIN X64) platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 14.2
+      SAS/IML 14.2
+      SAS/QC 14.2
+
+NOTE: Additional host information:
+
+ Linux LIN X64 2.6.32-754.11.1.el6.x86_64 #1 SMP Tue Jan 22 17:25:23 EST 2019 x86_64 Red Hat Enterprise Linux Server release 6.10 
+      (Santiago) 
+
+You are running SAS 9. Some SAS 8 files will be automatically converted 
+by the V9 engine; others are incompatible.  Please see 
+http://support.sas.com/rnd/migration/planning/platform/64bit.html
+
+PROC MIGRATE will preserve current SAS file attributes and is 
+recommended for converting all your SAS libraries from any 
+SAS 8 release to SAS 9.  For details and examples, please see
+http://support.sas.com/rnd/migration/index.html
+
+
+This message is contained in the SAS news file, and is presented upon
+initialization.  Edit the file "news" in the "misc/base" directory to
+display site-specific news and information in the program log.
+The command line option "-nonews" will prevent this display.
+
+
+
+
+NOTE: SAS initialization used:
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+NOTE: Libref SASDATA successfully assigned from logical server.
+NOTE: Libref STPSAMP successfully assigned from logical server.
+
+NOTE: AUTOEXEC processing beginning; file is /opt/sas/sas94/m3/Config_GCS/Lev1/SASApp/appserver_autoexec.sas.
+
+
+NOTE: AUTOEXEC processing completed.
+
+1          /******************************************************************************
+2           * Description: This code ensures that a SAS program, submitted to the SAS    *
+3           *              GRID using 'gsub', is run in a SAS session whose current      *
+4           *              working directory matches the directory from which the 'gsub' *
+5           *              command was issued or directory identified by the argument    *
+6           *              associated with the 'gsub' 'cwd' option                       *
+7           *                                                                            *
+8           * Note:        GSUB reserves the prefix 'gsub_' for the naming of macro      *
+9           *              variables. In order to prevent naming collisions please       *
+10          *              refrain from using the prefix 'gsub_' when naming macros in   *
+2                                                          The SAS System                             10:31 Wednesday, June 12, 2019
+
+11          *              in any program that will be submitted to the GSUB GS2         *
+12          *              environment                                                   *
+13          *                                                                            *
+14          * Author:      Gilead Sciences, Inc.                                         *
+15          *                                                                            *
+16          * Date:        01 September 2016                                             *
+17          *****************************************************************************/
+18         
+19         %*** Remember the original program ***;
+20         %let gsas_orig_abs_pgm_name = /biometrics/global/mgarea/utilities/programs/pd_check_call.sas;
+21         %let gsas_orig_pgm_name = pd_check_call.sas;
+22         
+23         %*** Set the current working directory ***;
+24         %sysexec cd /biometrics/global/testbpgl/m_dart/draft;
+25         
+26         %*** Update UNIX PWD environment variable to reflect the current working directory ***;
+27         %sysexec setenv PWD /biometrics/global/testbpgl/m_dart/draft;
+28         
+29         %*** Precode ***;
+30         %include "/gridwork/gsubwork/mcummings/pd_check_call.sas_1560360666.1409106@fcgsasappprdg09/init_sys.sas";
+    Got toolver from /biometrics/global/mgarea/data/sas_config.txt: v4.19.01
+ 
+      *******************************************************************************
+      * SAS Program:    /biometrics/global/mgarea/utilities/programs/pd_check_call.sas
+      * Run by:         mcummings on fcgsasappprdg01
+      * On Date:        12JUN2019:10:31
+      * Tools Version:  v4.19.01 (from init_sys.sas)
+      * SAS Version:    LIN X64 v9.4
+      *******************************************************************************
+ 
+NOTE: %INCLUDE (level 1) ending.
+902        
+903        *** Include the original SAS program ***;
+904        %include "/gridwork/gsubwork/mcummings/pd_check_call.sas_1560360666.1409106@fcgsasappprdg09/original_pd_check_call.sas" / source2;
+NOTE: %INCLUDE (level 1) file /gridwork/gsubwork/mcummings/pd_check_call.sas_1560360666.1409106@fcgsasappprdg09/original_pd_check_call.sas is file 
+      /gridwork/gsubwork/mcummings/pd_check_call.sas_1560360666.1409106@fcgsasappprdg09/original_pd_check_call.sas.
+905       +/********* start of header *****************************************************************
+906       +Program Name:	pd_check_call.sas
+907       +Author: 		Ben Liu (bliu)
+908       +Description: 	To check the macro program header/code for issues to be avoided as listed in the usage section
+909       +Category: 		Utility
+910       +Macros called:  %dirlist, %nobs, %m_message
+911       +Parameter:      prg: programe name
+912       +		        path: the path of the program
+913       +
+914       +Usage:	        Check program for the following;
+                                                                    The SAS System
+
+915       +	1. Macro header border text are:  “start of header” “end of header”, all low case letters. No longer like “
+916       +	   start of macro header”  “end of macro header”
+917       +	2. The first line in the header start with “Program Name”, no longer “Macro Name”. For example, Program Name:  tnfset.sas
+918       +	3. The program name” after “Program Name:” should be the same as macro filename in the directory structure
+919       +	4. The last modified date in the Change History should match the date part of the file datetime stamp to avoid audit issue
+920       +	5. Search for the word patterns as listed in the code
+921       +	6. Check change request filename to be cr_macroname
+922       +	7. Check UR filename to be ur_macroname
+923       +	8. Check if UR is updated with the latest CR
+924       +	9. Check if last URID in CR is the same as in UR
+925       +
+926       +    			Example calls for using this macro from GSAS command line:
+927       +	In the draft folder on Linux command line submit the script: mg_pd_check
+928       +
+929       +Change History:
+930       +     2018-07-23  bliu  Original Programmer
+931       +	 2019-02-13  bliu  Add checks for CR/UR
+932       +	 2019-02-20  bliu  Add checks for CR/UR to have the same URID
+933       +     2019-02-20  bliu  Make sure "No issue found" is printed if no issue found
+934       +
+935       +********* end of header *******************************************************************/
+936       +
+937       +%macro pd_check (prg=, path=);
+938       +libname here ".";
+939       +
+940       +***Get last modified date of the files from the directory;
+941       +%dirlist (dir  = &path,
+942       +          dsn  = dirlist,
+943       +          keep = dirname filename filesize filedate fileown);
+944       +
+945       +data date;
+946       +	set dirlist;
+947       +	date_mod=substr(strip(put(filedate, is8601dt.)), 1, 10);
+948       +	if scan(filename,-1,'.')='sas';
+949       +	keep filename date_mod;
+950       +run;
+951       +
+952       +%if %length(&prg)>0 and %length(&path)>0 %then %do;
+953       +
+954       +	**Import program text for check;
+955       +	data program;
+956       +		infile "&path/&prg..sas" pad dsd lrecl=32567;
+957       +    	length linetxt $200;
+958       +    	len=200;
+959       +    	input @1 linetxt $varying200. len;
+960       +		if strip(linetxt) in(' ', '*') then delete;
+                                                                    The SAS System
+
+961       +    	row + 1;
+962       +		output;
+963       +	run;
+964       +
+965       +	proc sql noprint;
+966       +		select filename into: filename from date where scan(filename,1,'.')="&prg";
+967       +		select date_mod into: date_mod from date where scan(filename,1,'.')="&prg";
+968       +		select row into: maxheader from program where index(lowcase(linetxt), 'end of header')>0 or index(lowcase(linetxt), 'end of macro
+968      !+header')>0;
+969       +	quit;
+970       +	%let filename=&filename;
+971       +	%let date_mode=&date_mod;
+972       +	%let maxheader=&maxheader;
+973       +
+974       +	***Tag the last modified date in header;
+975       +	data header_1;
+976       +		set program;
+977       +		where row <= &maxheader;
+978       +		if prxmatch("/\d{4}-\d{2}-\d{2}\b/", linetxt)>0 and prxmatch("/\d{2}:\d{2}:\d{2}\b/", linetxt)^>0 then tag + 1;
+979       +	run;
+980       +
+981       +	proc sort data=header_1; where tag>0; by tag; run;
+982       +	data header_2;
+983       +		set header_1 end=eof;
+984       +		by tag;
+985       +		if first.tag then moddate='Y';
+986       +		if moddate='Y';
+987       +	run;
+988       +
+989       +	data header_3;
+990       +		set header_2 end=eof;
+991       +		if eof then call symputx("lmdateln", row);
+992       +	run;
+993       +	%put lmdateln=&lmdateln;
+994       +
+995       +	**check UR and CR;
+996       +		*Check UR;
+997       +	%if %sysfunc(fileexist("&path/ur_&prg..xlsx"))  %then %do;
+998       +		%let message1=%str();
+999       +
+1000      +   		proc import datafile="&path/ur_&prg..xlsx" out=ur_&prg
+1001      +			dbms=xlsx replace;
+1002      +		run;
+1003      +
+1004      +		data ur_&prg; /*remove empty rows imported*/
+1005      +			set ur_&prg(where=(not missing(USER_REQUIREMENT)));
+                                                                    The SAS System
+
+1006      +		run;
+1007      +
+1008      +		data null;
+1009      +			set ur_&prg end=eof;
+1010      +			if eof then do;
+1011      +				call symputx('lstobs_ur', USER_REQUIREMENT);
+1012      +				call symputx('lsturid_ur', UR_ID);
+1013      +			end;	
+1014      +		run;
+1015      +	%end;
+1016      +	%else %do;
+1017      +   		%let message1=UR file does not exist; %end;
+1018      +
+1019      +	%if %sysfunc(fileexist("&path/ur_template.xlsx"))  %then %do;
+1020      +   		%let message1=%bquote(UR filename should be ur_&prg); %end;
+1021      +
+1022      +	%put message_UR=&message1;
+1023      +
+1024      +
+1025      +		*Check CR;
+1026      +	%if %sysfunc(fileexist("&path/cr_&prg..xlsx"))  %then %do;
+1027      +		%let message2=%str();
+1028      +
+1029      +   		proc import datafile="&path/cr_&prg..xlsx" out=cr_&prg
+1030      +			dbms=xlsx replace;
+1031      +		run;
+1032      +
+1033      +		data cr_&prg; /*remove empty rows imported*/
+1034      +			set cr_&prg(where=(not missing(USER_REQUIREMENT)));
+1035      +		run;
+1036      +
+1037      +		data null;
+1038      +			set cr_&prg end=eof;
+1039      +			if eof then do;
+1040      +				call symputx('lstobs_cr', USER_REQUIREMENT);
+1041      +				call symputx('lsturid_cr', UR_ID);
+1042      +			end;
+1043      +		run;
+1044      +	%end;
+1045      +	%else %do;
+1046      +   		%let message2=CR file does not exist; %end;
+1047      +
+1048      +	%if %sysfunc(fileexist("&path/cr_template.xlsx"))  %then %do;
+1049      +   		%let message2=%bquote(CR filename should be cr_&prg); %end;
+1050      +
+1051      +	%put message_CR=&message2;
+                                                                    The SAS System
+
+1052      +
+1053      +		*dataset for outputting messages;
+1054      +	data ur_check;
+1055      +		length message $200;
+1056      +		message='';
+1057      +		%if %length(&message1)>0 %then %do;
+1058      +			message="&message1"; output; %end;
+1059      +
+1060      +		%if %length(&message2)>0 %then %do;
+1061      +			message="&message2"; output; %end;
+1062      +
+1063      +		%if %length(&message1)=0 and %length(&message2)=0  %then %do;
+1064      +			%if "&lstobs_ur"^="&lstobs_cr" %then %do;
+1065      +				message="Please check UR has been updated with the latest CR"; output; %end;
+1066      +
+1067      +			%if "&lsturid_ur"^="&lsturid_cr" %then %do;
+1068      +				message="UR_ID in CR should be matching that in UR"; output; %end;
+1069      +		%end;
+1070      +	run;
+1071      +
+1072      +		*If obs=1 adn message= missing then mean no finding and delete the obs;
+1073      +	%nobs(ur_check);
+1074      +	data ur_check;
+1075      +		set ur_check;
+1076      +		if &nobs=1 and missing(message) then delete;
+1077      +	run;
+1078      +
+1079      +
+1080      +	**Check header/code and output found issues;
+1081      +	data pd_check;
+1082      +		retain filename row linetxt correct_value;
+1083      +		length filename correct_value $60 last_mdate $11 pattern $100;
+1084      +		set program(drop=len);
+1085      +		filename="&filename";
+1086      +
+1087      +		*Check header;
+1088      +		if not missing(linetxt) then do;
+1089      +			if row=1 and index(linetxt, 'start of header')<1 then do; correct_value='start of header'; output;end;
+1090      +			if row=&maxheader and index(linetxt, 'end of header')<1 then do; correct_value='end of header'; output;end;
+1091      +			if row=2 and strip(scan(linetxt, 1, ':'))^='Program Name' then do; correct_value='Program Name'; output;end;
+1092      +
+1093      +			if row=2 and compress(scan(linetxt, 2, ':'), ' '||'09'x)^=strip(filename) then do;
+1094      +					macro_name=compress(scan(linetxt, 2, ':'), ' '||'09'x);
+1095      +					if index(macro_name, '.')>0 and scan(macro_name, 1, '.')^=strip(scan(filename,1,'.')) then do;
+1096      +						correct_value="filename and macro name are not equal"; output; end;
+1097      +					end;
+                                                                    The SAS System
+
+1098      +
+1099      +			if row=&lmdateln and prxmatch("/\d{4}-\d{2}-\d{2}\b/", linetxt)>0 then last_mdate=substr(linetxt, anydigit(linetxt), 10);
+1100      +			if not missing(last_mdate) and strip(last_mdate)^=strip("&date_mod") then do; correct_value=strip("&date_mod"); output; end;
+1101      +		end;
+1102      +
+1103      +		*check code;
+1104      +		if not missing(linetxt) then do;
+1105      +			correct_value='';	
+1106      +
+1107      +			if index(upcase(linetxt), "UE"||"RROR")>0 then do; pattern="UE"||"RROR"; output;end;
+1108      +			if index(upcase(linetxt), "WA"||"RNING")>0 then do; pattern="WA"||"RNING"; output;end;
+1109      +			if index(upcase(linetxt), "UW"||"ARNING")>0 then do; pattern="UW"||"ARNING"; output;end;
+1110      +			if index(upcase(linetxt), "AL"||"ERT_")>0 then do; pattern="AL"||"ERT_"; output;end;
+1111      +			if index(upcase(linetxt), "AB"||"NORMALLY TERMINATED")>0 then do; pattern="AB"||"NORMALLY TERMINATED"; output;end;
+1112      +			if index(upcase(linetxt), "AL"||"READY EXISTS")>0 then do; pattern="AL"||"READY EXISTS"; output;end;
+1113      +			if index(upcase(linetxt), "AR"||"GUMENT TO FUNCTION")>0 then do; pattern="AR"||"GUMENT TO FUNCTION"; output;end;
+1114      +			if index(upcase(linetxt), "CO"||"ULD NOT BE WRITTEN")>0 then do; pattern="CO"||"ULD NOT BE WRITTEN"; output;end;
+1115      +			if index(upcase(linetxt), "DI"||"VISION BY ZERO DETECTED")>0 then do; pattern="DI"||"VISION BY ZERO DETECTED"; output;end;
+1116      +			if index(upcase(linetxt), "DO"||"ES NOT EXIST")>0 then do; pattern="DO"||"ES NOT EXIST"; output;end;
+1117      +			if index(upcase(linetxt), "EN"||"DSAS")>0 then do; pattern="EN"||"DSAS"; output;end;
+1118      +			if index(upcase(linetxt), "ER"||"ROR")>0 then do; pattern="ER"||"ROR"; output;end;
+1119      +			if index(upcase(linetxt), "EX"||"PERIMENTAL IN RELEASE")>0 then do; pattern="EX"||"PERIMENTAL IN RELEASE"; output;end;
+1120      +			if index(upcase(linetxt), "FO"||"RMAT NATIVE TO ANOTHER HOST")>0 then do; pattern="FO"||"RMAT NATIVE TO ANOTHER HOST"; output;end;
+1121      +			if index(upcase(linetxt), "FO"||"RMAT WAS TOO SMALL FOR THE NUMBER TO BE PRINTED")>0 then do; pattern="FO"||"RMAT WAS TOO SMALL FOR THE
+1121     !+NUMBER TO BE PRINTED"; output;end;
+1122      +			if index(upcase(linetxt), "FO"||"RMATTING EXCEPTION")>0 then do; pattern="FO"||"RMATTING EXCEPTION"; output;end;
+1123      +			if index(upcase(linetxt), "IN"||"VALID ARGUMENT")>0 then do; pattern="IN"||"VALID ARGUMENT"; output;end;
+1124      +			if index(upcase(linetxt), "IN"||"VALID NUMERIC DATA")>0 then do; pattern="IN"||"VALID NUMERIC DATA"; output;end;
+1125      +			if index(upcase(linetxt), "LO"||"ST CARD")>0 then do; pattern="LO"||"ST CARD"; output;end;
+1126      +			if index(upcase(linetxt), "MA"||"THEMATICAL OPERATIONS COULD NOT BE PERFORMED")>0 then do; pattern="MA"||"THEMATICAL OPERATIONS COULD
+1126     !+NOT BE PERFORMED"; output;end;
+1127      +			if index(upcase(linetxt), "MI"||"SSING VALUES WERE GENERATED")>0 then do; pattern="MI"||"SSING VALUES WERE GENERATED"; output;end;
+1128      +			if index(upcase(linetxt), "MO"||"RE THAN ONE DATA SET WITH REPEATS OF BY VALUES")>0 then do; pattern="MO"||"RE THAN ONE DATA SET WITH
+1128     !+REPEATS OF BY VALUES"; output;end;
+1129      +			if index(upcase(linetxt), "NO"||"T APPENDED BECAUSE OF TYPE MISMATCH")>0 then do; pattern="NO"||"T APPENDED BECAUSE OF TYPE MISMATCH";
+1129     !+output;end;
+1130      +			if index(upcase(linetxt), "NO"||"T FOUND")>0 then do; pattern="NO"||"T FOUND"; output;end;
+1131      +			if index(upcase(linetxt), "NO"||"T PREVIOUSLY")>0 then do; pattern="NO"||"T PREVIOUSLY"; output;end;
+1132      +			if index(upcase(linetxt), "NO"||"TE: FORMATTED VALUES OF")>0 then do; pattern="NO"||"TE: FORMATTED VALUES OF"; output;end;
+1133      +			if index(upcase(linetxt), "ON"||"E OR MORE LINES WERE TRUNCATED")>0 then do; pattern="ON"||"E OR MORE LINES WERE TRUNCATED"; output;end;
+1134      +			if index(upcase(linetxt), "OU"||"TSIDE THE AXIS RANGE")>0 then do; pattern="OU"||"TSIDE THE AXIS RANGE"; output;end;
+1135      +			if index(upcase(linetxt), "SA"||"S SYSTEM STOPPED PROCESSING THIS STEP")>0 then do; pattern= "SA"||"S SYSTEM STOPPED PROCESSING THIS
+1135     !+STEP"; output;end;
+1136      +			if index(upcase(linetxt), "SA"||"S WENT TO A NEW LINE")>0 then do; pattern="SA"||"S WENT TO A NEW LINE"; output;end;
+1137      +			if index(upcase(linetxt), "SE"||"GMENTATION VIOLATION")>0 then do; pattern="SE"||"GMENTATION VIOLATION"; output;end;
+1138      +			if index(upcase(linetxt), "SH"||"IFTED BY THE BEST FORMAT")>0 then do; pattern="SH"||"IFTED BY THE BEST FORMAT"; output;end;
+                                                                    The SAS System
+
+1139      +			if index(upcase(linetxt), "TH"||"E MEANING OF AN IDENTIFIER AFTER A QUOTED STRING MAY CHANGE")>0 then do; pattern="TH"||"E MEANING OF AN
+1139     !+ IDENTIFIER AFTER A QUOTED STRING MAY CHANGE"; output;end;
+1140      +			if index(upcase(linetxt), "TR"||"UNCATION MAY RESULT")>0 then do; pattern="TR"||"UNCATION MAY RESULT"; output;end;
+1141      +			if index(upcase(linetxt), "UN"||"INITIALIZED")>0 then do; pattern="UN"||"INITIALIZED"; output;end;
+1142      +			if index(upcase(linetxt), "VA"||"LUES HAVE BEEN CONVERTED TO")>0 then do; pattern="VA"||"LUES HAVE BEEN CONVERTED TO"; output;end;
+1143      +			if index(upcase(linetxt), "WI"||"LL BE OVERWRITTEN BY DATA SET")>0 then do; pattern="WI"||"LL BE OVERWRITTEN BY DATA SET"; output;end;
+1144      +		end;
+1145      +	run;
+1146      +
+1147      +%end;
+1148      +
+1149      +**Put ur_check and program_check together;
+1150      +	data pd_check_final;
+1151      +		set ur_check pd_check;
+1152      +	run;
+1153      +
+1154      +**If found issues then put a message in the log and output the findings into an Excel file;
+1155      +%nobs(pd_check_final);
+1156      +
+1157      +%if &nobs>0 %then %do;
+1158      +    %m_message(6, Issue found: please see details in &prg._pd_check_findings.xlsx);
+1159      +
+1160      +	proc export data=pd_check_final outfile= "&path/&prg._pd_check_findings.xlsx"
+1161      +     	dbms=xlsx replace;
+1162      +	run;
+1163      +%end;
+1164      +%else %do;
+1165      +	data pd_check_final_;
+1166      +		length filename correct_value $60;
+1167      +		filename="&filename"; correct_value="No issue found";
+1168      +	run;
+1169      +
+1170      +	proc export data=pd_check_final_ outfile= "&path/&prg._pd_check_findings.xlsx"
+1171      +     	dbms=xlsx replace;
+1172      +	run;
+1173      +%end;
+1174      +
+1175      +%mend pd_check;
+1176      +
+1177      +options symbolgen mprint;
+1178      +
+1179      +%let prg=%scan(&currpath, -2, '/');
+SYMBOLGEN:  Macro variable CURRPATH resolves to /biometrics/global/testbpgl/m_dart/draft
+1180      +%put currpath=&currpath	prg=&prg;
+SYMBOLGEN:  Macro variable CURRPATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+                                                                    The SAS System
+
+currpath=/biometrics/global/testbpgl/m_dart/draft prg=m_dart
+1181      +
+1182      +%pd_check (prg=&prg, path=&currpath);
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+SYMBOLGEN:  Macro variable CURRPATH resolves to /biometrics/global/testbpgl/m_dart/draft
+MPRINT(PD_CHECK):   libname here ".";
+NOTE: Libref HERE was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /biometrics/global/testbpgl/m_dart/draft
+MPRINT(PD_CHECK):   ***Get last modified date of the files from the directory;
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable SYSSCP resolves to LIN X64
+SYMBOLGEN:  Macro variable SYSSCP resolves to LIN X64
+SYMBOLGEN:  Macro variable CURRPATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable DIR resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable _DIRNAME_ resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable _DIRNAME_ resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable _SLASH_ resolves to /
+SYMBOLGEN:  Macro variable _DIRNAME_ resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable _SLASH_ resolves to /
+SYMBOLGEN:  Macro variable _DIRCMD_ resolves to cd /biometrics/global/testbpgl/m_dart/draft; ls -o
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+SYMBOLGEN:  Macro variable _DIRNAME_ resolves to /biometrics/global/testbpgl/m_dart/draft/
+MPRINT(DIRLIST):   filename _dirlst_ pipe "cd /biometrics/global/testbpgl/m_dart/draft; ls -o ""/biometrics/global/testbpgl/m_dart/draft/""";
+SYMBOLGEN:  Macro variable DSN resolves to dirlist
+MPRINT(DIRLIST):   data dirlist;
+SYMBOLGEN:  Macro variable KEEP resolves to dirname filename filesize filedate fileown
+MPRINT(DIRLIST):   keep dirname filename filesize filedate fileown;
+MPRINT(DIRLIST):   attrib dirname length=$200 label="Source Directory Name";
+MPRINT(DIRLIST):   attrib filename length=$200 label="Source File Name";
+MPRINT(DIRLIST):   attrib filesize length=8 label="File Size";
+MPRINT(DIRLIST):   attrib filedate length=8 label="File Date/Time" format=datetime19. informat=datetime19.;
+MPRINT(DIRLIST):   attrib fileown length=$20 label="Owner";
+MPRINT(DIRLIST):   attrib filegrp length=$20 label="Group";
+MPRINT(DIRLIST):   attrib filemode length=$12 label="Mode";
+MPRINT(DIRLIST):   attrib time length=$12 label="Time";
+MPRINT(DIRLIST):   attrib month length=$3 label="Month";
+MPRINT(DIRLIST):   attrib day length=$8 label="Day";
+MPRINT(DIRLIST):   attrib yrortime length=$8 label="Year or Time";
+MPRINT(DIRLIST):   attrib sizordir length=$40 label="Size or <DIR>";
+MPRINT(DIRLIST):   attrib text length=$1024;
+MPRINT(DIRLIST):   array _charlst $ _character_;
+MPRINT(DIRLIST):   array _numlst _numeric_;
+SYMBOLGEN:  Macro variable _DIRNAME_ resolves to /biometrics/global/testbpgl/m_dart/draft/
+MPRINT(DIRLIST):   retain dirname "/biometrics/global/testbpgl/m_dart/draft/";
+MPRINT(DIRLIST):   infile _dirlst_ lrecl=1024 missover pad;
+                                                                    The SAS System
+
+SYMBOLGEN:  Macro variable _SLASH_ resolves to /
+MPRINT(DIRLIST):   if ("/" eq "/") then do;
+MPRINT(DIRLIST):   input filemode dummy $ fileown filesize ?? month day yrortime filename ;
+MPRINT(DIRLIST):   if (filemode = "total") then delete;
+MPRINT(DIRLIST):   if (index(yrortime,":")) then do;
+MPRINT(DIRLIST):   year = put(year(today()),4.);
+MPRINT(DIRLIST):   time = yrortime;
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   else do;
+MPRINT(DIRLIST):   year = yrortime;
+MPRINT(DIRLIST):   time = "00:00";
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   if input(compress(day||month||year),date9.) > today() then year = put(year(today())-1,4.);
+MPRINT(DIRLIST):   filedate = input(compress(day||month||year||":"||time), datetime19.);
+MPRINT(DIRLIST):   if (filemode =: "d") then filordir = "dir ";
+MPRINT(DIRLIST):   else do;
+MPRINT(DIRLIST):   filename = compress(filename,"*");
+MPRINT(DIRLIST):   filordir = "file";
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   end;
+SYMBOLGEN:  Macro variable SYSSCPL resolves to Linux
+MPRINT(DIRLIST):   else if ("Linux" in ("WIN_SRV","WINNT","NET_SRV")) then do;
+MPRINT(DIRLIST):   input text $char1024.;
+MPRINT(DIRLIST):   text = left(text);
+MPRINT(DIRLIST):   date = input(text,?? mmddyy10.);
+MPRINT(DIRLIST):   if ( date );
+MPRINT(DIRLIST):   time = substr(text,11,10);
+MPRINT(DIRLIST):   text = substr(text,21);
+MPRINT(DIRLIST):   text = left(text);
+MPRINT(DIRLIST):   sizordir = scan(text,1," ");
+MPRINT(DIRLIST):   text = substr(text,length(sizordir)+1);
+MPRINT(DIRLIST):   filename = left(text);
+MPRINT(DIRLIST):   if (sizordir eq "<DIR>") then filordir = "dir ";
+MPRINT(DIRLIST):   else do;
+MPRINT(DIRLIST):   filordir = "file";
+MPRINT(DIRLIST):   filesize = input(sizordir,?? comma32.);
+MPRINT(DIRLIST):   filedate = input(put(date,date9.)||":"||substr(left(time),1,5)||":00", datetime19.);
+MPRINT(DIRLIST):   if index(upcase(time),"P") then filedate = filedate + 12*60*60;
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   if (filordir eq "file");
+MPRINT(DIRLIST):   run;
+
+NOTE: The infile _DIRLST_ is:
+      Pipe command="cd /biometrics/global/testbpgl/m_dart/draft; ls -o "/biometrics/global/testbpgl/m_dart/draft/""
+
+                                                                    The SAS System
+
+NOTE: 8 records were read from the infile _DIRLST_.
+      The minimum record length was 9.
+      The maximum record length was 72.
+NOTE: The data set WORK.DIRLIST has 7 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+SYMBOLGEN:  Macro variable DEBUG resolves to *
+MPRINT(DIRLIST):   * proc print data=&dsn;
+SYMBOLGEN:  Macro variable DEBUG resolves to *
+MPRINT(DIRLIST):   * title "dirlist: Directory Listing of &_dirname_";
+SYMBOLGEN:  Macro variable DEBUG resolves to *
+MPRINT(DIRLIST):   * title2 "dirlist: Saved to SAS Data Set %upcase(&dsn)";
+SYMBOLGEN:  Macro variable DEBUG resolves to *
+MPRINT(DIRLIST):   * run;
+MPRINT(PD_CHECK):  ;
+MPRINT(PD_CHECK):   data date;
+MPRINT(PD_CHECK):   set dirlist;
+MPRINT(PD_CHECK):   date_mod=substr(strip(put(filedate, is8601dt.)), 1, 10);
+MPRINT(PD_CHECK):   if scan(filename,-1,'.')='sas';
+MPRINT(PD_CHECK):   keep filename date_mod;
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 7 observations read from the data set WORK.DIRLIST.
+NOTE: The data set WORK.DATE has 1 observations and 2 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+MPRINT(PD_CHECK):   **Import program text for check;
+MPRINT(PD_CHECK):   data program;
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   infile "/biometrics/global/testbpgl/m_dart/draft/m_dart.sas" pad dsd lrecl=32567;
+MPRINT(PD_CHECK):   length linetxt $200;
+MPRINT(PD_CHECK):   len=200;
+MPRINT(PD_CHECK):   input @1 linetxt $varying200. len;
+MPRINT(PD_CHECK):   if strip(linetxt) in(' ', '*') then delete;
+MPRINT(PD_CHECK):   row + 1;
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):   run;
+                                                                    The SAS System
+
+
+NOTE: The infile "/biometrics/global/testbpgl/m_dart/draft/m_dart.sas" is:
+      Filename=/biometrics/global/testbpgl/m_dart/draft/m_dart.sas,
+      Owner Name=mcummings,Group Name=stats,
+      Access Permission=-rwxrwxrwx,
+      Last Modified=12Jun2019:10:28:33,
+      File Size (bytes)=19447
+
+NOTE: 510 records were read from the infile "/biometrics/global/testbpgl/m_dart/draft/m_dart.sas".
+      The minimum record length was 0.
+      The maximum record length was 170.
+NOTE: The data set WORK.PROGRAM has 460 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(PD_CHECK):   proc sql noprint;
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   select filename into: filename from date where scan(filename,1,'.')="m_dart";
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   select date_mod into: date_mod from date where scan(filename,1,'.')="m_dart";
+MPRINT(PD_CHECK):   select row into: maxheader from program where index(lowcase(linetxt), 'end of header')>0 or index(lowcase(linetxt), 'end of macro 
+header')>0;
+MPRINT(PD_CHECK):   quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable FILENAME resolves to m_dart.sas                                                                                            
+                                                                                                              
+SYMBOLGEN:  Macro variable DATE_MOD resolves to 2019-06-12         
+SYMBOLGEN:  Macro variable MAXHEADER resolves to       30
+MPRINT(PD_CHECK):   ***Tag the last modified date in header;
+MPRINT(PD_CHECK):   data header_1;
+MPRINT(PD_CHECK):   set program;
+SYMBOLGEN:  Macro variable MAXHEADER resolves to 30
+MPRINT(PD_CHECK):   where row <= 30;
+MPRINT(PD_CHECK):   if prxmatch("/\d{4}-\d{2}-\d{2}\b/", linetxt)>0 and prxmatch("/\d{2}:\d{2}:\d{2}\b/", linetxt)^>0 then tag + 1;
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 30 observations read from the data set WORK.PROGRAM.
+      WHERE row<=30;
+NOTE: The data set WORK.HEADER_1 has 30 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+                                                                    The SAS System
+
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(PD_CHECK):   proc sort data=header_1;
+MPRINT(PD_CHECK):   where tag>0;
+MPRINT(PD_CHECK):   by tag;
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 21 observations read from the data set WORK.HEADER_1.
+      WHERE tag>0;
+NOTE: SAS sort was used.
+NOTE: The data set WORK.HEADER_1 has 21 observations and 4 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(PD_CHECK):   data header_2;
+MPRINT(PD_CHECK):   set header_1 end=eof;
+MPRINT(PD_CHECK):   by tag;
+MPRINT(PD_CHECK):   if first.tag then moddate='Y';
+MPRINT(PD_CHECK):   if moddate='Y';
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 21 observations read from the data set WORK.HEADER_1.
+NOTE: The data set WORK.HEADER_2 has 9 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(PD_CHECK):   data header_3;
+MPRINT(PD_CHECK):   set header_2 end=eof;
+MPRINT(PD_CHECK):   if eof then call symputx("lmdateln", row);
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 9 observations read from the data set WORK.HEADER_2.
+NOTE: The data set WORK.HEADER_3 has 9 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable LMDATELN resolves to 28
+lmdateln=28
+                                                                    The SAS System
+
+MPRINT(PD_CHECK):   **check UR and CR;
+MPRINT(PD_CHECK):   *Check UR;
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   proc import datafile="/biometrics/global/testbpgl/m_dart/draft/ur_m_dart.xlsx" out=ur_m_dart dbms=xlsx replace;
+MPRINT(PD_CHECK):   RXLX;
+MPRINT(PD_CHECK):   run;
+
+NOTE:    Variable Name Change.  UR ID -> UR_ID                           
+NOTE:    Variable Name Change.  User Requirement -> User_Requirement                
+NOTE: The import data set has 24 observations and 5 variables.
+NOTE: WORK.UR_M_DART data set was successfully created.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.53 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   data ur_m_dart;
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   set ur_m_dart(where=(not missing(USER_REQUIREMENT)));
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 24 observations read from the data set WORK.UR_M_DART.
+      WHERE not MISSING(USER_REQUIREMENT);
+NOTE: The data set WORK.UR_M_DART has 24 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(PD_CHECK):   data null;
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   set ur_m_dart end=eof;
+MPRINT(PD_CHECK):   if eof then do;
+MPRINT(PD_CHECK):   call symputx('lstobs_ur', USER_REQUIREMENT);
+MPRINT(PD_CHECK):   call symputx('lsturid_ur', UR_ID);
+MPRINT(PD_CHECK):   end;
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 24 observations read from the data set WORK.UR_M_DART.
+NOTE: The data set WORK.NULL has 24 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+                                                                    The SAS System
+
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable MESSAGE1 resolves to 
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+message_UR=
+MPRINT(PD_CHECK):   *Check CR;
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   proc import datafile="/biometrics/global/testbpgl/m_dart/draft/cr_m_dart.xlsx" out=cr_m_dart dbms=xlsx replace;
+MPRINT(PD_CHECK):   RXLX;
+MPRINT(PD_CHECK):   run;
+
+NOTE: The import data set has 8 observations and 4 variables.
+NOTE: WORK.CR_M_DART data set was successfully created.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.47 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   data cr_m_dart;
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   set cr_m_dart(where=(not missing(USER_REQUIREMENT)));
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 2 observations read from the data set WORK.CR_M_DART.
+      WHERE not MISSING(USER_REQUIREMENT);
+NOTE: The data set WORK.CR_M_DART has 2 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(PD_CHECK):   data null;
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   set cr_m_dart end=eof;
+MPRINT(PD_CHECK):   if eof then do;
+MPRINT(PD_CHECK):   call symputx('lstobs_cr', USER_REQUIREMENT);
+MPRINT(PD_CHECK):   call symputx('lsturid_cr', UR_ID);
+MPRINT(PD_CHECK):   end;
+                                                                    The SAS System
+
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 2 observations read from the data set WORK.CR_M_DART.
+NOTE: The data set WORK.NULL has 2 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable MESSAGE2 resolves to 
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+message_CR=
+MPRINT(PD_CHECK):   *dataset for outputting messages;
+MPRINT(PD_CHECK):   data ur_check;
+MPRINT(PD_CHECK):   length message $200;
+MPRINT(PD_CHECK):   message='';
+SYMBOLGEN:  Macro variable MESSAGE1 resolves to 
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+SYMBOLGEN:  Macro variable MESSAGE2 resolves to 
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+SYMBOLGEN:  Macro variable MESSAGE1 resolves to 
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+SYMBOLGEN:  Macro variable MESSAGE2 resolves to 
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+SYMBOLGEN:  Macro variable LSTOBS_UR resolves to update comments with "error" and "warning" in them
+NOTE: Line generated by the macro variable "LSTOBS_UR".
+1182       "update comments with "error" and "warning" in them
+           _______________________     _______
+           49                          49
+SYMBOLGEN:  Macro variable LSTOBS_CR resolves to update comments with "error" and "warning" in them
+NOTE: Line generated by the macro variable "LSTOBS_CR".
+1182       "update comments with "error" and "warning" in them
+           _______________________     _______
+           49                          49
+SYMBOLGEN:  Macro variable LSTURID_UR resolves to 24
+SYMBOLGEN:  Macro variable LSTURID_CR resolves to 24
+MPRINT(PD_CHECK):   run;
+
+NOTE 49-169: The meaning of an identifier after a quoted string might change in a future SAS release.  Inserting white space between a quoted string 
+             and the succeeding identifier is recommended.
+
+NOTE: The data set WORK.UR_CHECK has 1 observations and 1 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+                                                                    The SAS System
+
+      
+
+MPRINT(PD_CHECK):   *If obs=1 adn message= missing then mean no finding and delete the obs;
+SYMBOLGEN:  Macro variable DATASET resolves to ur_check
+SYMBOLGEN:  Macro variable DSID resolves to 1
+SYMBOLGEN:  Macro variable DSID resolves to 1
+SYMBOLGEN:  Macro variable DSID resolves to 1
+SYMBOLGEN:  Macro variable NOBS resolves to 1
+MPRINT(PD_CHECK):  ;
+MPRINT(PD_CHECK):   data ur_check;
+MPRINT(PD_CHECK):   set ur_check;
+SYMBOLGEN:  Macro variable NOBS resolves to 1
+MPRINT(PD_CHECK):   if 1=1 and missing(message) then delete;
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 1 observations read from the data set WORK.UR_CHECK.
+NOTE: The data set WORK.UR_CHECK has 0 observations and 1 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(PD_CHECK):   **Check header/code and output found issues;
+MPRINT(PD_CHECK):   data pd_check;
+MPRINT(PD_CHECK):   retain filename row linetxt correct_value;
+MPRINT(PD_CHECK):   length filename correct_value $60 last_mdate $11 pattern $100;
+MPRINT(PD_CHECK):   set program(drop=len);
+SYMBOLGEN:  Macro variable FILENAME resolves to m_dart.sas
+MPRINT(PD_CHECK):   filename="m_dart.sas";
+MPRINT(PD_CHECK):   *Check header;
+MPRINT(PD_CHECK):   if not missing(linetxt) then do;
+MPRINT(PD_CHECK):   if row=1 and index(linetxt, 'start of header')<1 then do;
+MPRINT(PD_CHECK):   correct_value='start of header';
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+SYMBOLGEN:  Macro variable MAXHEADER resolves to 30
+MPRINT(PD_CHECK):   if row=30 and index(linetxt, 'end of header')<1 then do;
+MPRINT(PD_CHECK):   correct_value='end of header';
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if row=2 and strip(scan(linetxt, 1, ':'))^='Program Name' then do;
+MPRINT(PD_CHECK):   correct_value='Program Name';
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if row=2 and compress(scan(linetxt, 2, ':'), ' '||'09'x)^=strip(filename) then do;
+MPRINT(PD_CHECK):   macro_name=compress(scan(linetxt, 2, ':'), ' '||'09'x);
+                                                                    The SAS System
+
+MPRINT(PD_CHECK):   if index(macro_name, '.')>0 and scan(macro_name, 1, '.')^=strip(scan(filename,1,'.')) then do;
+MPRINT(PD_CHECK):   correct_value="filename and macro name are not equal";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):   end;
+MPRINT(PD_CHECK):   end;
+SYMBOLGEN:  Macro variable LMDATELN resolves to 28
+MPRINT(PD_CHECK):   if row=28 and prxmatch("/\d{4}-\d{2}-\d{2}\b/", linetxt)>0 then last_mdate=substr(linetxt, anydigit(linetxt), 10);
+SYMBOLGEN:  Macro variable DATE_MOD resolves to 2019-06-12         
+MPRINT(PD_CHECK):   if not missing(last_mdate) and strip(last_mdate)^=strip("2019-06-12         ") then do;
+SYMBOLGEN:  Macro variable DATE_MOD resolves to 2019-06-12         
+MPRINT(PD_CHECK):   correct_value=strip("2019-06-12         ");
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):   end;
+MPRINT(PD_CHECK):   end;
+MPRINT(PD_CHECK):   *check code;
+MPRINT(PD_CHECK):   if not missing(linetxt) then do;
+MPRINT(PD_CHECK):   correct_value='';
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "UE"||"RROR")>0 then do;
+MPRINT(PD_CHECK):   pattern="UE"||"RROR";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "WA"||"RNING")>0 then do;
+MPRINT(PD_CHECK):   pattern="WA"||"RNING";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "UW"||"ARNING")>0 then do;
+MPRINT(PD_CHECK):   pattern="UW"||"ARNING";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "AL"||"ERT_")>0 then do;
+MPRINT(PD_CHECK):   pattern="AL"||"ERT_";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "AB"||"NORMALLY TERMINATED")>0 then do;
+MPRINT(PD_CHECK):   pattern="AB"||"NORMALLY TERMINATED";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "AL"||"READY EXISTS")>0 then do;
+MPRINT(PD_CHECK):   pattern="AL"||"READY EXISTS";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "AR"||"GUMENT TO FUNCTION")>0 then do;
+MPRINT(PD_CHECK):   pattern="AR"||"GUMENT TO FUNCTION";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "CO"||"ULD NOT BE WRITTEN")>0 then do;
+                                                                    The SAS System
+
+MPRINT(PD_CHECK):   pattern="CO"||"ULD NOT BE WRITTEN";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "DI"||"VISION BY ZERO DETECTED")>0 then do;
+MPRINT(PD_CHECK):   pattern="DI"||"VISION BY ZERO DETECTED";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "DO"||"ES NOT EXIST")>0 then do;
+MPRINT(PD_CHECK):   pattern="DO"||"ES NOT EXIST";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "EN"||"DSAS")>0 then do;
+MPRINT(PD_CHECK):   pattern="EN"||"DSAS";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "ER"||"ROR")>0 then do;
+MPRINT(PD_CHECK):   pattern="ER"||"ROR";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "EX"||"PERIMENTAL IN RELEASE")>0 then do;
+MPRINT(PD_CHECK):   pattern="EX"||"PERIMENTAL IN RELEASE";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "FO"||"RMAT NATIVE TO ANOTHER HOST")>0 then do;
+MPRINT(PD_CHECK):   pattern="FO"||"RMAT NATIVE TO ANOTHER HOST";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "FO"||"RMAT WAS TOO SMALL FOR THE NUMBER TO BE PRINTED")>0 then do;
+MPRINT(PD_CHECK):   pattern="FO"||"RMAT WAS TOO SMALL FOR THE NUMBER TO BE PRINTED";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "FO"||"RMATTING EXCEPTION")>0 then do;
+MPRINT(PD_CHECK):   pattern="FO"||"RMATTING EXCEPTION";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "IN"||"VALID ARGUMENT")>0 then do;
+MPRINT(PD_CHECK):   pattern="IN"||"VALID ARGUMENT";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "IN"||"VALID NUMERIC DATA")>0 then do;
+MPRINT(PD_CHECK):   pattern="IN"||"VALID NUMERIC DATA";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "LO"||"ST CARD")>0 then do;
+MPRINT(PD_CHECK):   pattern="LO"||"ST CARD";
+MPRINT(PD_CHECK):   output;
+                                                                    The SAS System
+
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "MA"||"THEMATICAL OPERATIONS COULD NOT BE PERFORMED")>0 then do;
+MPRINT(PD_CHECK):   pattern="MA"||"THEMATICAL OPERATIONS COULD NOT BE PERFORMED";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "MI"||"SSING VALUES WERE GENERATED")>0 then do;
+MPRINT(PD_CHECK):   pattern="MI"||"SSING VALUES WERE GENERATED";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "MO"||"RE THAN ONE DATA SET WITH REPEATS OF BY VALUES")>0 then do;
+MPRINT(PD_CHECK):   pattern="MO"||"RE THAN ONE DATA SET WITH REPEATS OF BY VALUES";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "NO"||"T APPENDED BECAUSE OF TYPE MISMATCH")>0 then do;
+MPRINT(PD_CHECK):   pattern="NO"||"T APPENDED BECAUSE OF TYPE MISMATCH";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "NO"||"T FOUND")>0 then do;
+MPRINT(PD_CHECK):   pattern="NO"||"T FOUND";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "NO"||"T PREVIOUSLY")>0 then do;
+MPRINT(PD_CHECK):   pattern="NO"||"T PREVIOUSLY";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "NO"||"TE: FORMATTED VALUES OF")>0 then do;
+MPRINT(PD_CHECK):   pattern="NO"||"TE: FORMATTED VALUES OF";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "ON"||"E OR MORE LINES WERE TRUNCATED")>0 then do;
+MPRINT(PD_CHECK):   pattern="ON"||"E OR MORE LINES WERE TRUNCATED";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "OU"||"TSIDE THE AXIS RANGE")>0 then do;
+MPRINT(PD_CHECK):   pattern="OU"||"TSIDE THE AXIS RANGE";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "SA"||"S SYSTEM STOPPED PROCESSING THIS STEP")>0 then do;
+MPRINT(PD_CHECK):   pattern= "SA"||"S SYSTEM STOPPED PROCESSING THIS STEP";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "SA"||"S WENT TO A NEW LINE")>0 then do;
+MPRINT(PD_CHECK):   pattern="SA"||"S WENT TO A NEW LINE";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "SE"||"GMENTATION VIOLATION")>0 then do;
+                                                                    The SAS System
+
+MPRINT(PD_CHECK):   pattern="SE"||"GMENTATION VIOLATION";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "SH"||"IFTED BY THE BEST FORMAT")>0 then do;
+MPRINT(PD_CHECK):   pattern="SH"||"IFTED BY THE BEST FORMAT";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "TH"||"E MEANING OF AN IDENTIFIER AFTER A QUOTED STRING MAY CHANGE")>0 then do;
+MPRINT(PD_CHECK):   pattern="TH"||"E MEANING OF AN IDENTIFIER AFTER A QUOTED STRING MAY CHANGE";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "TR"||"UNCATION MAY RESULT")>0 then do;
+MPRINT(PD_CHECK):   pattern="TR"||"UNCATION MAY RESULT";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "UN"||"INITIALIZED")>0 then do;
+MPRINT(PD_CHECK):   pattern="UN"||"INITIALIZED";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "VA"||"LUES HAVE BEEN CONVERTED TO")>0 then do;
+MPRINT(PD_CHECK):   pattern="VA"||"LUES HAVE BEEN CONVERTED TO";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   if index(upcase(linetxt), "WI"||"LL BE OVERWRITTEN BY DATA SET")>0 then do;
+MPRINT(PD_CHECK):   pattern="WI"||"LL BE OVERWRITTEN BY DATA SET";
+MPRINT(PD_CHECK):   output;
+MPRINT(PD_CHECK):  end;
+MPRINT(PD_CHECK):   end;
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 460 observations read from the data set WORK.PROGRAM.
+NOTE: The data set WORK.PD_CHECK has 0 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(PD_CHECK):   **Put ur_check and program_check together;
+MPRINT(PD_CHECK):   data pd_check_final;
+MPRINT(PD_CHECK):   set ur_check pd_check;
+MPRINT(PD_CHECK):   run;
+
+NOTE: There were 0 observations read from the data set WORK.UR_CHECK.
+NOTE: There were 0 observations read from the data set WORK.PD_CHECK.
+NOTE: The data set WORK.PD_CHECK_FINAL has 0 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+                                                                    The SAS System
+
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(PD_CHECK):   **If found issues then put a message in the log and output the findings into an Excel file;
+SYMBOLGEN:  Macro variable DATASET resolves to pd_check_final
+SYMBOLGEN:  Macro variable DSID resolves to 1
+SYMBOLGEN:  Macro variable DSID resolves to 1
+SYMBOLGEN:  Macro variable DSID resolves to 1
+SYMBOLGEN:  Macro variable NOBS resolves to 0
+MPRINT(PD_CHECK):  ;
+SYMBOLGEN:  Macro variable NOBS resolves to 0
+MPRINT(PD_CHECK):   data pd_check_final_;
+MPRINT(PD_CHECK):   length filename correct_value $60;
+SYMBOLGEN:  Macro variable FILENAME resolves to m_dart.sas
+MPRINT(PD_CHECK):   filename="m_dart.sas";
+MPRINT(PD_CHECK):   correct_value="No issue found";
+MPRINT(PD_CHECK):   run;
+
+NOTE: The data set WORK.PD_CHECK_FINAL_ has 1 observations and 2 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable PATH resolves to /biometrics/global/testbpgl/m_dart/draft
+SYMBOLGEN:  Macro variable PRG resolves to m_dart
+MPRINT(PD_CHECK):   proc export data=pd_check_final_ outfile= "/biometrics/global/testbpgl/m_dart/draft/m_dart_pd_check_findings.xlsx" dbms=xlsx 
+replace;
+MPRINT(PD_CHECK):   WXLX;
+MPRINT(PD_CHECK):   run;
+
+NOTE: The export data set has 1 observations and 2 variables.
+NOTE: "/biometrics/global/testbpgl/m_dart/draft/m_dart_pd_check_findings.xlsx" file was successfully created.
+NOTE: PROCEDURE EXPORT used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.01 seconds
+      
+
+1183      +
+1184      +
+1185      +
+NOTE: %INCLUDE (level 1) ending.
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           1.60 seconds
+                                                                    The SAS System
+
+      cpu time            0.32 seconds
+      
+
+Grid Job Id: 706332

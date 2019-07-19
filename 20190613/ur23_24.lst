@@ -1,0 +1,48 @@
+                                                          GUTS output for m_dart UR_ID=23-24
+
+  Obs UTILITY    QCPRGID    DEVELOPER    PROGDATE      QCDATE      UR_ID    METHOD    RESULT
+
+   1  m_dart     cmistry    mcummings     draft      2019-06-13     23        CR       PASS 
+   2  m_dart     cmistry    mcummings     draft      2019-06-13     24        CR       PASS 
+
+  Obs REQTXT
+
+   1  updated merge logic for dart_subjectid relating to CPT, will allow a match solely on subjid to identify dart_subjectid, code provided by Vinh
+   2  update comments with "error" and "warning" in them                                                                                           
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                                                 Data Extracted: xxx
+                                  Source: /biometrics/global/testbpgl/m_dart/draft/ur23_24.sas v9.4 13JUN2019:13:59

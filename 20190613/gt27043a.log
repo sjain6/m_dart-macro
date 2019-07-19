@@ -1,0 +1,1362 @@
+#### start of automatic log check result(s) ####
+   /biometrics/global/testbpgl/m_dart/draft/gt27043a.log
+      1 instance(s) of search pattern #11:DOES NOT EXIST
+##### end of automatic log check result(s) #####
+1                                                          The SAS System                              13:59 Thursday, June 13, 2019
+
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M4) 
+      Licensed to GILEAD SCIENCES - CONTROL NODE 1, Site 70173328.
+NOTE: This session is executing on the Linux 2.6.32-754.11.1.el6.x86_64 (LIN X64) platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 14.2
+      SAS/IML 14.2
+      SAS/QC 14.2
+
+NOTE: Additional host information:
+
+ Linux LIN X64 2.6.32-754.11.1.el6.x86_64 #1 SMP Tue Jan 22 17:25:23 EST 2019 x86_64 Red Hat Enterprise Linux Server release 6.10 
+      (Santiago) 
+
+You are running SAS 9. Some SAS 8 files will be automatically converted 
+by the V9 engine; others are incompatible.  Please see 
+http://support.sas.com/rnd/migration/planning/platform/64bit.html
+
+PROC MIGRATE will preserve current SAS file attributes and is 
+recommended for converting all your SAS libraries from any 
+SAS 8 release to SAS 9.  For details and examples, please see
+http://support.sas.com/rnd/migration/index.html
+
+
+This message is contained in the SAS news file, and is presented upon
+initialization.  Edit the file "news" in the "misc/base" directory to
+display site-specific news and information in the program log.
+The command line option "-nonews" will prevent this display.
+
+
+
+
+NOTE: SAS initialization used:
+      real time           0.14 seconds
+      cpu time            0.05 seconds
+      
+NOTE: Libref SASDATA successfully assigned from logical server.
+NOTE: Libref STPSAMP successfully assigned from logical server.
+
+NOTE: AUTOEXEC processing beginning; file is /opt/sas/sas94/m3/Config_GCS/Lev1/SASApp/appserver_autoexec.sas.
+
+
+NOTE: AUTOEXEC processing completed.
+
+1          /******************************************************************************
+2           * Description: This code ensures that a SAS program, submitted to the SAS    *
+3           *              GRID using 'gsub', is run in a SAS session whose current      *
+4           *              working directory matches the directory from which the 'gsub' *
+5           *              command was issued or directory identified by the argument    *
+6           *              associated with the 'gsub' 'cwd' option                       *
+7           *                                                                            *
+8           * Note:        GSUB reserves the prefix 'gsub_' for the naming of macro      *
+9           *              variables. In order to prevent naming collisions please       *
+10          *              refrain from using the prefix 'gsub_' when naming macros in   *
+2                                                          The SAS System                              13:59 Thursday, June 13, 2019
+
+11          *              in any program that will be submitted to the GSUB GS2         *
+12          *              environment                                                   *
+13          *                                                                            *
+14          * Author:      Gilead Sciences, Inc.                                         *
+15          *                                                                            *
+16          * Date:        01 September 2016                                             *
+17          *****************************************************************************/
+18         
+19         %*** Remember the original program ***;
+20         %let gsas_orig_abs_pgm_name = /biometrics/global/testbpgl/m_dart/draft/gt27043a.sas;
+21         %let gsas_orig_pgm_name = gt27043a.sas;
+22         
+23         %*** Set the current working directory ***;
+24         %sysexec cd /biometrics/global/testbpgl/m_dart/draft;
+25         
+26         %*** Update UNIX PWD environment variable to reflect the current working directory ***;
+27         %sysexec setenv PWD /biometrics/global/testbpgl/m_dart/draft;
+28         
+29         %*** Precode ***;
+30         %include "/gridwork/gsubwork/cmistry/gt27043a.sas_1560459573.9900856@fcgsasappprdg02/init_sys.sas";
+    Got toolver from /biometrics/global/mgarea/data/sas_config.txt: v4.19.01
+ 
+      *******************************************************************************
+      * SAS Program:    /biometrics/global/testbpgl/m_dart/draft/gt27043a.sas
+      * Run by:         cmistry on fcgsasappprdg07
+      * On Date:        13JUN2019:13:59
+      * Tools Version:  v4.19.01 (from init_sys.sas)
+      * SAS Version:    LIN X64 v9.4
+      *******************************************************************************
+ 
+NOTE: %INCLUDE (level 1) ending.
+902        
+903        *** Include the original SAS program ***;
+904        %include "/gridwork/gsubwork/cmistry/gt27043a.sas_1560459573.9900856@fcgsasappprdg02/original_gt27043a.sas" / source2;
+NOTE: %INCLUDE (level 1) file /gridwork/gsubwork/cmistry/gt27043a.sas_1560459573.9900856@fcgsasappprdg02/original_gt27043a.sas is file 
+      /gridwork/gsubwork/cmistry/gt27043a.sas_1560459573.9900856@fcgsasappprdg02/original_gt27043a.sas.
+905       +/* Start of header ********************************/;
+906       +/*  Program: gt27043a.sas                         */;
+907       +/********************************* End of header **/;
+908       +
+909       +
+910       +*** insert GUTS unit testing macros library. ;
+911       +options insert=(sasautos=/biometrics/system_programming/guts);
+912       +
+913       +%guts_init_test;
+MPRINT(GUTS_INIT_TEST):   *** set option so in log it will print location of autocall macros;
+                                                                    The SAS System
+
+MPRINT(GUTS_INIT_TEST):   option mautolocdisplay;
+MPRINT(GUTS_INIT_TEST):   *** global macro variables;
+CURRPATH=/biometrics/global/testbpgl/m_dart/draft
+UTILITY=m_dart
+PROGDATE=draft
+TESTLOC=/biometrics/global/testbpgl/m_dart/draft
+REQLOC=/biometrics/global/testbpgl/m_dart/draft
+MPRINT(GUTS_INIT_TEST):   *** get date of utility file;
+FILEDATE=20190612
+MPRINT(GUTS_INIT_TEST):   *** set standard library names here (input, output, testdata, etc.);
+MPRINT(GUTS_INIT_TEST):   libname out ".";
+NOTE: Libref OUT was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /biometrics/global/testbpgl/m_dart/draft
+MPRINT(GUTS_INIT_TEST):   *** in case we are testing guts_init_test. can not include macro while executing;
+MPRINT(GUTS_INIT_TEST):   *** check if utility file exists;
+NOTE: %INCLUDE (level 2) file /biometrics/global/testbpgl/m_dart/draft/m_dart.sas is file /biometrics/global/testbpgl/m_dart/draft/m_dart.sas.
+914       +/********* start of header ******************************************
+915       +Program Name:  m_dart.sas
+916       +Author:        Kevin Miller (kmiller05)
+917       +Description:   Send dataset to DART staging server to be displayed on DART web portal
+918       +Category:      CP
+919       +Macros called:
+920       +Parameter:
+921       +Usage:
+922       +
+923       +Change History:
+924       + 2017-06-01 Kevin Miller (kmiller05) Original programmer
+925       + 2017-06-07 kmiller05   Updated to create defined erro(r) tables when using fastload to upload to teradata
+926       + 2018-04-05 bliu Updated to standard macro header format
+927       + 2018-07-05 kmiller05 1.Updated to support CPT by adding datacutid and  subjectid to dataset prior to loading.
+928       +                          Note: Only when CPT global var = Y.
+929       +					  2.add study to dart dup. email
+930       +					  3.Add ISBIOMARKERLISTING to metadata load for non-standard/static listings.
+931       +					  4.Add g_testing use, Normal Load (Prod): %let g_testing=0, Dev Load: %let g_testing=1,
+932       +					    val load: %let g_testing=2, generate XLSX files in CWD: %let g_testing=3.
+933       + 2018-11-28 kmiller05 1.Updated to use SQL server load
+934       +                      2.Added new parameter called listtype
+935       +					  3.Remove ISBIOMARKERLISTING from metadata load.
+936       +					  4.Remove valtest server.
+937       + 2018-12-06 kmiller05 1.Update to allow variables with length of 32 chars
+938       +                      2.Resolve numeric vars rounding, use best. for non-formated numeric vars
+939       +					  3.Allow listcat to override all assumed categories.
+940       + 2019-01-17 bliu      Mask word(s) that lead to logcheck alert message
+941       + 2019-05-02 kmiller05 Update email subject line to fix bug, using sysfunc instead of || in warn(ing) masking.
+942       + 2019-06-12 mcummings updated merge logic for dart_subjectid relating to CPT, will allow a match solely
+                                                                    The SAS System
+
+943       +                      on subjid to identify dart_subjectid, code provided by Vinh
+944       +********** end of header *******************************************/
+945       +
+946       +%macro m_dart(
+947       +	 dsnin     = ,
+948       +	 dsnout    = ,
+949       +	 listlabel = ,
+950       +	 listtitle = ,
+951       +	 type      = LISTING,
+952       +	 itemurl   = ,
+953       +	 keys      = ,
+954       +	 cpt_merge_key=invid scrnid subjid,
+955       +	 listcat   = ,
+956       +	 devtest   =
+957       +             );
+958       +			
+959       +	 libname b3plib "/biometrics/global/mgarea/data/";
+960       +     %let __optmain=%sysfunc(getoption(minoperator));
+961       +
+962       +   options minoperator;
+963       +		/** Check if being run in CPT directory, used to load CPT data **/
+964       +         %let __scancpt = %sysfunc(pathname(rawdata));
+965       +         %if (%index(%upcase(&__scancpt),_CPT)) >0 %then %do;		
+966       +		  /** Set prefix to load CPT tables **/
+967       +		  %let __prfix=C_;
+968       +		  /** Load cut_id from dataset **/
+969       +		  proc sql noprint;
+970       +           select distinct(CUT_ID) into :__CUT_ID
+971       +           from rawdata.vw_dataset_detail
+972       +          quit;
+973       +		  /** Add in datacutID variable to dataset **/
+974       +		  data &dsnin;
+975       +		   set &dsnin;
+976       +		    datacutid=&__CUT_ID;
+977       +		
+978       +		    format datacutid 8.;
+979       +		  run;
+980       +		 %end; %else %do;
+981       +		   %let __prfix=;
+982       +		   %let __CUT_ID=.;
+983       +		 %end;
+984       +	 /*** If study is CPT=Y then add in merge vars ***/
+985       +       %if %symexist(CPT) %then %do;		
+986       +		%if (%index(%upcase(&CPT),Y)) >0 %then %do;		
+987       +		 /*** Load MERGE Key (subjid) for all listings that are subject level if CPT study = Y ***/
+988       +         %if (%length(&cpt_merge_key)>0) %then %do;
+                                                                    The SAS System
+
+989       + 		   /** Load subjectid from dataset **/
+990       +			%local __inv __scrn __subj __oth is_miss_subj_val;
+991       +
+992       +			%let __inv=;%let __scrn=;%let __subj=; %let __oth=; %let is_miss_subj_val=1;
+993       +			
+994       +			%do _aa_=1 %to %sysfunc(countw(&cpt_merge_key));
+995       +			  %let curr_i = %upcase(%scan(&cpt_merge_key,&_aa_));
+996       +			  %if &curr_i in (SITENUMBER INVID) %then %let __inv=&curr_i;
+997       +			  %else %if &curr_i in (SCRNID SCRNNUM) %then %let __scrn=&curr_i;
+998       +			  %else %if &curr_i in (SUBJID SUBJECT_ID) %then %let __subj=&curr_i;
+999       +			  %else %let __oth=&__oth &curr_i;
+1000      +			%end;
+1001      +
+1002      +  	  /*** if multiple subjects for same id, then delete ***/
+1003      +     	proc sort data=rawdata.dm out=lu_id;
+1004      +     		 by invid scrnid subjid;
+1005      +   		run;
+1006      +
+1007      +   		data lu_id;
+1008      +   			  set lu_id;
+1009      +   			  by invid scrnid subjid;
+1010      +   			
+1011      +   			  if not (first.subjid and last.subjid) then delete;
+1012      +   		run;
+1013      +
+1014      +   	  %nobs(&dsnin);	
+1015      +
+1016      +  	  %if %length(&__subj) ne 0 and &nobs > 0 %then %do;	
+1017      +  	
+1018      +  	    ods listing close;
+1019      +  	    proc freq data=&dsnin nlevels;
+1020      +  	  	  ods output nlevels = nlvl;
+1021      +  	  	  tables &__subj / noprint;
+1022      +  	    run; quit;
+1023      +  	    ods listing;
+1024      +  	
+1025      +  	    proc sql noprint;
+1026      +  	    	  select nmisslevels into :is_miss_subj_val from nlvl;
+1027      +  	    quit;
+1028      +  	  %end;
+1029      +
+1030      +			proc sql noprint undo_policy=none;
+1031      +			  create table &dsnin as
+1032      +			  select d.*, s.subjectid as dart_subjectid format=8.
+1033      +			  from &dsnin d
+1034      +			  left join lu_id s
+                                                                    The SAS System
+
+1035      +			  on (1=1
+1036      +			
+1037      +			  	%if %length(&__inv) ne 0 and &is_miss_subj_val ne 0 %then and input(s.invid,best.)=input(d.&__inv,best.);
+1038      +			  	%if %length(&__scrn) ne 0 and &is_miss_subj_val ne 0 %then %do;
+1039      +			  		  %if %length(&__subj) ne 0 %then
+1040      +  			    	and input(s.scrnid, best.)=input(ifc(not missing(d.&__subj) and missing(d.&__scrn), s.scrnid,d.&__scrn), best.);
+1041      +  			    	%else and input(s.scrnid, best.)=input(d.&__scrn,best.);
+1042      +  			  	%end;
+1043      +			  	%if %length(&__subj) ne 0 %then and input(s.subjid, best.)=input(d.&__subj, best.);
+1044      +			  	)
+1045      +			  %if %length(&__subj) ne 0 %then or (not missing(d.&__subj) and input(s.subjid, best.)=input(d.&__subj, best.));
+1046      +  			  ;
+1047      +			quit;
+1048      +			
+1049      +          %end;
+1050      +         %end;
+1051      +        %end;
+1052      +        /*** Check to see if study level macro var &g_testing exists, if it does use it ***/
+1053      +        %if %symexist(g_testing) %then %do;		
+1054      +		 %if (%length(&devtest)=0) and (&g_testing)=1  %then %do;
+1055      +		  %let devtest=Y;
+1056      +		 %end;
+1057      +		 %if (%length(&devtest)=0) and (&g_testing)=2  %then %do;
+1058      +		  %let devtest=Y;
+1059      +		 %end;
+1060      +		 %if ((%length(&devtest)=0) or (%upcase(&devtest)=UAT)) and (&g_testing)=3  %then %do;
+1061      +		  proc export data=&dsnin
+1062      +		       dbms=xlsx
+1063      +               outfile="./&dsnin..xlsx"
+1064      +			   replace;
+1065      +          run;
+1066      +		  %goto notloaded;
+1067      +		 %end;
+1068      +		%end;
+1069      +
+1070      +  /*-----------------------------------------------------------------------------------
+1071      +    1) Setup DART Teradata SERVER Library and Parameters	
+1072      +  -----------------------------------------------------------------------------------*/
+1073      +      /*** Set local macro vars ***/
+1074      +      %local __scancpt __optmain __dart1lst __study __timedt __uniqkeys __keycnt __recnum
+1075      +	         __time __numobs __numdups __pcpemail __ccemail;
+1076      +
+1077      +	  /*** Set name of standard macros (these use method type1 (static listings)) ***/
+1078      +	  %let __dart1lst = %str(l_aecode l_nonmatch_toxgr l_lab34 l_cmcode l_aesddisc l_aecmmh l_ae34 l_aetox345
+1079      +	                         l_echecks l_echecks_bm l_echecks_run l_echecks_run_bm l_echecks_com_bm l_echecks_com
+1080      +							 l_pve_prg l_pve_dth l_pve_sae l_pve_metrics);
+                                                                    The SAS System
+
+1081      +
+1082      +	  /*** Set email of add'l resource to be CC'd on duplicate warn||ing emails ***/
+1083      +	  %let __ccemail=kevin.miller@gilead.com;
+1084      +
+1085      +      /*** Set DART SQL libnames, Dev, Val and Prod ***/
+1086      +	/*** Default Libnames ***/
+1087      +	  /**DART2 PROD  **/
+1088      +	     %m_passw(dartprod);
+1089      +         libname dart pathname(dartprod);
+1090      +	%if (%upcase(&devtest)=Y) %then %do;
+1091      +	     %m_passw(dartdev);
+1092      +         libname dart pathname(dartdev);
+1093      +	%end;
+1094      +
+1095      +       data _null_;
+1096      +        call symputx('__study',"s"||compress("&sno.","-_/", "aA"));
+1097      +	   run;
+1098      +
+1099      +  %if ("&dsnout "=" ") %then %do;
+1100      +   %let dsnout=NOTINDART1;
+1101      +  %end;
+1102      + /*** only use type1 if listing namae is for standard dart listings ***/
+1103      + %if &dsnout in (&__dart1lst.) %then %do;
+1104      +
+1105      +  /*-------------------------------------------------------------------------------
+1106      +   TYPE 1: STATIC LISTINGS UPLOAD PROCSS HERE:
+1107      +  -------------------------------------------------------------------------------*/
+1108      +
+1109      +    /*--------------------------- --------------------------------------------------------
+1110      +      2) Create DART DATASET and DART METADATA dataset
+1111      +    -----------------------------------------------------------------------------------*/
+1112      +	  data _null_;
+1113      +         tt = strip(compress(put(time(),time.),':'));
+1114      +         if (length(tt)>4) then tt = substr(tt,length(tt)-3);
+1115      +         call symput('__time',strip(tt));
+1116      +         call symput('__study',"s"||compress("&sno.","-_/", "aA"));
+1117      +	   run;
+1118      +
+1119      +      data __mdatastd;
+1120      +         length TableName $500 StudyName LISTINGCODE $100 LoadingStatus $50 DataCutId 4.;
+1121      +         TableName=upcase("&__prfix.&__study._&dsnout._&__time.");
+1122      +         StudyName=upcase("&__study.");
+1123      +         LISTINGCODE=upcase("&__prfix.&dsnout.");
+1124      +         DateTimeLoaded=datetime();
+1125      +         LoadingStatus='Loaded';
+1126      +		 DataCutId=&__CUT_ID;
+                                                                    The SAS System
+
+1127      +
+1128      +         format datetimeloaded datetime22.3;
+1129      +         keep tablename studyname LISTINGCODE datetimeloaded loadingstatus DataCutId;
+1130      +      run;
+1131      +
+1132      +	   data _null_;
+1133      +        call symput('dartdsn',upcase("&__study._&dsnout._&__time."));
+1134      +		call symput('__mdtatbl',"SAS_STD_DATALOAD");
+1135      +	   run;
+1136      + %end; %else %do;
+1137      +  /*-------------------------------------------------------------------------------
+1138      +   TYPE 2: DART 2.0 DYNAMIC UPLOAD PROCESS BEGINS HERE:
+1139      +  -------------------------------------------------------------------------------*/
+1140      +   /** Check all required parameters are present: ***/
+1141      +    %if ("&dsnin "=" ") %then %do;
+1142      +	  %put %sysfunc(cat(ERR,OR:)) Parameter DSNIN is blank: no data sent to DART.;
+1143      +	  %goto notloaded;
+1144      +    %end;
+1145      +    %if ("&listlabel "=" ") %then %do;
+1146      +	  %put %sysfunc(cat(ERR,OR:)) Parameter LISTLABEL is blank: no data sent to DART.;	
+1147      +	  %goto notloaded;
+1148      +    %end;
+1149      +    %if ("&listtitle "=" ") %then %do;
+1150      +	  %put %sysfunc(cat(ERR,OR:)) Parameter LISTTITLE is blank: no data sent to DART.;		
+1151      +	  %goto notloaded;
+1152      +    %end;
+1153      +    %if ("&keys "=" ") %then %do;
+1154      +	  %put %sysfunc(cat(ERR,OR:)) Parameter KEYS is blank: no data sent to DART.;	
+1155      +	  %goto notloaded;
+1156      +    %end;
+1157      +
+1158      +   /** Check to Assign Category ID Metadata Variable  **/
+1159      +    /** scan for SCRNID SCRNNUM SUBJID SUBJECT_ID **/
+1160      +	%let CATEGORYID=;
+1161      +	%let __pcpemail=;
+1162      +	%if (%index(%upcase(&keys),SCRNID)) >0  or (%index(%upcase(&keys),SCRNNUM)) >0 or (%index(%upcase(&keys),SUBJID)) >0 or
+1162     !+(%index(%upcase(&keys),SUBJECT_ID)) >0 %then %do;
+1163      +	 %let CATEGORYID=2;
+1164      +	%end; %else %do;
+1165      +	 %let CATEGORYID=1;
+1166      +	%end;
+1167      +    %if (%index(%upcase(&progpath),BMCDP)) >0 %then %do;
+1168      +	  %let CATEGORYID=%sysevalf(&CATEGORYID.+2);
+1169      +	  %let __pcpemail=biomarkerCPsupport@gilead.com;
+1170      +    %end;
+1171      +	%if %length(&listcat) ne 0 %then %do;
+                                                                    The SAS System
+
+1172      +     %let CATEGORYID=&listcat;
+1173      +    %end;
+1174      +
+1175      +    /*** Check for duplicates (regardless of case), if duplicates exist, cancel run and email info to primary cp ***/
+1176      +
+1177      +    data __keydup;
+1178      +     set &dsnin (keep=&keys);
+1179      +       array Chars[*] _character_;
+1180      +        do _dup_ = 1 to dim(Chars);
+1181      +           Chars[_dup_] = upcase(Chars[_dup_]);
+1182      +        end;
+1183      +     drop _dup_;
+1184      +    run;
+1185      +
+1186      +	proc sort data = __keydup nodupkey force dupout = __dupchk;
+1187      +	 by &keys;
+1188      +	run;
+1189      +
+1190      +	 %let dsid=%sysfunc(open(__dupchk,i));
+1191      +	 %let __numdups=%sysfunc(attrn(&dsid,nobs));
+1192      +	 %let rc=%sysfunc(close(&dsid));
+1193      +
+1194      +	 %if &__numdups >0 %then %do;
+1195      +	  %if %length(&__pcpemail) = 0 %then %do;
+1196      +	   data __pcp;
+1197      +	    set b3plib.b3pcont;
+1198      +		 if protocol = "&sno";
+1199      +		  if pcp = "" then do;
+1200      +		   call symputx('__pcpemail',strip("&__ccemail"));
+1201      +		  end; else do;
+1202      +		   call symputx('__pcpemail',strip(pcp));
+1203      +		  end;
+1204      +	   run;
+1205      +	  %end;
+1206      +      ods escapechar = "^";
+1207      +      filename mymail email to=("&__pcpemail")
+1208      +	                         cc=("&__ccemail" "&sysuserid.@gilead.com")
+1209      +	                         from="DART Support <biometrics.support@gilead.com>"
+1210      +							 sender="DART Support <biometrics.support@gilead.com>"
+1211      +	                         subject="DART Duplicate Observations %sysfunc(cat(Warn,ing)) &sno"
+1212      +					    	 type="TEXT/HTML";
+1213      +       data _null_;
+1214      +          file mymail;
+1215      +            put '<html>';
+1216      +			put '<head>';
+1217      +			put '<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">';
+                                                                    The SAS System
+
+1218      +			put '<title></title>';
+1219      +			put '</head>';
+1220      +			put '<body1>';
+1221      +			put '<span style="font-size: 12pt;';
+1222      +			put 'font-family: &quot;Calibri&quot;,&quot;serif&quot;;">';
+1223      +			put "Attempted upload to DART failed.<br>";
+1224      +			put "Duplicate records identified, listing not uploaded to DART.<br>";
+1225      +			put "Update Keys parameter in DART macro call to reflect a unique sort.<br>";
+1226      +            put '<hr>';
+1227      +			put '</span>';
+1228      +			put '</body1>';
+1229      +
+1230      +            put '<body2>';
+1231      +			put '<b>';
+1232      +			put '<span style="font-size: 10pt;';
+1233      +			put 'font-family: &quot;Calibri&quot;,&quot;serif&quot;;">';
+1234      +			put '<br>';
+1235      +            put "Study: &sno<br>";
+1236      +			put "Program: &progpath/&jobname <br>";
+1237      +			put "Listing Label: &listlabel <br>";			
+1238      +			put "Listing Title: &listtitle <br>";
+1239      +			put "Key Vars: &keys<br>";
+1240      +			put "Submitted By: &sysuserid<br>";
+1241      +			put '<b>';
+1242      +			put '</span>';
+1243      +			put '</body2>';
+1244      +			put '</html>';
+1245      +	   run;
+1246      +       filename mymail clear;
+1247      +       %m_message( 6, );
+1248      +	   %put %sysfunc(cat(WARN,ING:)) Duplicate observations based on keys provided exist in input dataset: data not sent to DART.;
+1249      +	   %goto notloaded;
+1250      +	 %end;
+1251      +
+1252      +       data _null_;
+1253      +         call symput('__timedt',strip(put(today(),best.))||strip(compress(put(timepart(datetime()),time12.3),':.')));
+1254      +		 call symput('__mdtatbl',"SAS_NONSTD_DATALOAD");
+1255      +		 call symputx('__keycnt',countw(COMPBL("&keys")));
+1256      +		 call symputx('__uniqkeys',upcase("&keys"));
+1257      +	   run;
+1258      +
+1259      +      /** Check #obs in dataset**/
+1260      +       %let dsid=%sysfunc(open(&dsnin,i));
+1261      +       %let __numobs=%sysfunc(attrn(&dsid,nobs));
+1262      +       %let rc=%sysfunc(close(&dsid));	
+1263      +
+                                                                    The SAS System
+
+1264      +	   /*** Set Keys into macro var for metadata sorting on DART side ***/
+1265      +
+1266      +	   data __keyvrsmv;
+1267      +	    length name $200 keys $4000;
+1268      +	    keys=tranwrd(trim(COMPBL("&keys")),' ',', ');
+1269      +		%do _key_=1 %to &__keycnt;
+1270      +		 name=upcase(scan(keys,&_key_,', '));
+1271      +		 output;
+1272      +		%end;
+1273      +		drop keys;
+1274      +	   run;
+1275      +
+1276      +	   proc sort data = __keyvrsmv;
+1277      +	    by name;
+1278      +	   run;
+1279      +
+1280      +       /*** Create Metadata Table ***/
+1281      +  	    data __mdatanonstd;
+1282      +         length STUDYNAME  LISTINGCODE  $100 LISTINGTITLE $500 ITEMTYPE_TD $100 ORDERBYCOL $800 ITEMURL_TD $2000
+1283      +		        LST_STRUCT_TABLENAME LST_BODY_TABLENAME $100 LOADINGSTATUS $50 DataCutId 4.;
+1284      +
+1285      +		  STUDYNAME=upcase("&__study.");
+1286      +		  LISTINGCODE ="&listlabel";
+1287      +		  LISTINGTITLE="&listtitle";
+1288      +	      ITEMTYPE_TD="Listing";
+1289      +		  ITEMURL_TD="";
+1290      +		  LST_STRUCT_TABLENAME="&__prfix.LST_STRCT_&__timedt";
+1291      +		  LST_BODY_TABLENAME="&__prfix.LST_BODY_&__timedt";
+1292      +	      DATETIMELOADED=datetime();
+1293      +          LOADINGSTATUS='Loaded';
+1294      +		  ORDERBYCOL=tranwrd(trim(COMPBL("&keys")),' ',', ');
+1295      +		  CATEGORYID=&CATEGORYID;
+1296      +		  DataCutId=&__CUT_ID;
+1297      +
+1298      +		  format DATETIMELOADED datetime22.;
+1299      +		run;
+1300      +
+1301      +	    /*** Create Listing Structure Variable Metadata Table ***/
+1302      +	       %local __dslib __dsname;
+1303      +	       %if %index(&dsnin,.) %then %do;
+1304      +	       	    %let __dslib=%scan(&dsnin,1);
+1305      +	       	    %let __dsname=%scan(&dsnin,2);
+1306      +	       %end;
+1307      +	       %else %do;
+1308      +	       	    %let __dslib=WORK;
+1309      +	       	    %let __dsname=&dsnin;
+                                                                    The SAS System
+
+1310      +	       %end;
+1311      +
+1312      +         proc sql noprint;
+1313      +           create table __dsnincont as
+1314      +           select distinct memname, name, label, type, varnum,  put(length, best.) as length_char, format
+1315      +            from sashelp.vcolumn
+1316      +              where libname = upcase("&__dslib") and
+1317      +                    memname = upcase("&__dsname")
+1318      +             order by name;
+1319      +         quit;
+1320      +
+1321      +		 data __lstruct;
+1322      +		  length name $200;
+1323      +		  set __dsnincont;
+1324      +		     if (format="") then do;
+1325      +			  if upcase(TYPE) = "CHAR" then do;
+1326      +               fmtcode = "$"||strip(length_char);
+1327      +			  end; else do;
+1328      +			   fmtcode = "best.";
+1329      +			  end;
+1330      +             end; else do;
+1331      +               fmtcode = strip(format);
+1332      +             end;
+1333      +			 name=upcase(name);
+1334      +			 keep varnum name label fmtcode type;
+1335      +		run;
+1336      +
+1337      +	   proc sort data = __lstruct;
+1338      +	    by name;
+1339      +	   run;
+1340      +
+1341      +		data __lstruct2 (keep=columnvar_td columnvar_sql columnname_td columnorder_td columnformat_td iskeyvariable type);
+1342      +		 length columnvar_td columnname_td  columnformat_td $75 columnorder_td 8. iskeyvariable $1;
+1343      +		 merge __lstruct(in=_a_) __keyvrsmv(in=_b_);
+1344      +		  by name;
+1345      +		   if _a_ and _b_ then iskeyvariable="Y";
+1346      +		   else iskeyvariable="N";
+1347      +		   columnvar_td="S_"||strip(substr(name,1,30));
+1348      +		   columnvar_sql=strip(substr(name,1,32));
+1349      +		   /** Remove teradata specific special chars from column name **/
+1350      +		   columnname_td=strip(compress(label,".,'/;[]!@#$%^&*()_{}|\?><:"));
+1351      +		   columnorder_td=varnum;
+1352      +		   columnformat_td=strip(fmtcode);
+1353      +		run;
+1354      +
+1355      +	   options missing=' ';	
+                                                                    The SAS System
+
+1356      +	   /*** Create Listing Body Table ***/
+1357      +
+1358      +         proc sort data=__lstruct2;
+1359      +           by columnorder_td;
+1360      +         run;
+1361      +
+1362      +         data _null_;
+1363      +           set __lstruct2;
+1364      +              call symput( '__vnam'||trim(left(put(_N_,best.))), trim(columnvar_sql));
+1365      +              call symput( '__newvnam'||trim(left(put(_N_,best.))), trim(substr(columnvar_td,1,32)));
+1366      +              call symput( '__dart_XX_'||trim(left(put(_N_,best.))),'__dart_XX_'||trim(left(put(_N_,best.))));	
+1367      +              call symput( '__vtyp'||trim(left(put(_N_,best.))),strip(upcase(substr(type,1,1))));
+1368      +              call symput( '__vfmt'||trim(left(put(_N_,best.))), trim(columnformat_td));
+1369      +              call symput( '__vnum',trim(left(put(_N_,best.))));
+1370      +         run;
+1371      +
+1372      +	     data __lbody;
+1373      +	      set &dsnin;
+1374      +	        %do _ii_ = 1 %to &__vnum;
+1375      +			   %if (&&__vtyp&_ii_=C) %then %do;
+1376      +                __dart_XX_&_ii_ = &&__vnam&_ii_;
+1377      +               %end; %else %do;
+1378      +                __dart_XX_&_ii_ = left(put(&&__vnam&_ii_, &&__vfmt&_ii_));
+1379      +               %end;
+1380      +	        %end;
+1381      +		  keep __dart_XX_:;
+1382      +	     run;
+1383      +
+1384      +		 data __lbody2;
+1385      +		  set __lbody;
+1386      +		  %do _ii_ = 1 %to &__vnum;
+1387      +		   &&__newvnam&_ii_ = __dart_XX_&_ii_;
+1388      +		  %end;
+1389      +		  drop __dart_XX_:;
+1390      +		 run;
+1391      +         Options Missing=.;
+1392      +
+1393      +    /*-----------------------------------------------------------------------------------
+1394      +      3) Assign Tables to DART SQL SERVER
+1395      +    -----------------------------------------------------------------------------------*/
+1396      +    %end;
+1397      +
+1398      +     proc sql;
+1399      +	   %if &dsnout in (&__dart1lst.) %then %do;
+1400      +            create table dart.&__prfix.&dartdsn  as
+1401      +               select * from &dsnin;	
+                                                                    The SAS System
+
+1402      +            insert into dart.SAS_STD_DATALOAD (tablename, studyname, LISTINGCODE, datetimeloaded, loadingstatus, DataCutId)
+1403      +               select tablename, studyname, LISTINGCODE, datetimeloaded, loadingstatus, DataCutId
+1404      +			from __mdatastd;
+1405      +	   %end; %else %do;
+1406      +            create table dart.&__prfix.LST_STRCT_&__timedt  as
+1407      +               select * from __lstruct2;
+1408      +            create table dart.&__prfix.LST_BODY_&__timedt as
+1409      +               select * from __lbody2;	
+1410      +            insert into dart.SAS_NONSTD_DATALOAD (STUDYNAME, LISTINGCODE , LISTINGTITLE, ITEMTYPE_TD, ITEMURL_TD,
+1411      +			             LST_STRUCT_TABLENAME, LST_BODY_TABLENAME, DATETIMELOADED, LOADINGSTATUS,
+1412      +						 CATEGORYID, ORDERBYCOL, DataCutId)
+1413      +               select STUDYNAME, LISTINGCODE , LISTINGTITLE, ITEMTYPE_TD, ITEMURL_TD, LST_STRUCT_TABLENAME, LST_BODY_TABLENAME,
+1414      +			     DATETIMELOADED, LOADINGSTATUS, CATEGORYID, ORDERBYCOL, DataCutId
+1415      +            from __mdatanonstd;
+1416      +	  %end;
+1417      +      quit;
+1418      +
+1419      +	  %notloaded:
+1420      +
+1421      +   options &__optmain;
+1422      +
+1423      +%mend m_dart;
+NOTE: %INCLUDE (level 2) ending.
+NOTE: %INCLUDE (level 1) resuming.
+MPRINT(GUTS_INIT_TEST):   *** check which requirements spreadsheet exist, if any;
+MPRINT(GUTS_INIT_TEST):   *** legacy. many old tests use ur_template.xlsx;
+MPRINT(GUTS_INIT_TEST):   *** create empty dataset to hold requirements to enforce data type and length of char variables;
+MPRINT(GUTS_INIT_TEST):   proc sql noprint;
+MPRINT(GUTS_INIT_TEST):   create table __requirements (utility char(50), developer char(50), ur_id num, user_requirement char(2000));
+NOTE: Table WORK.__REQUIREMENTS created, with 0 rows and 4 columns.
+MPRINT(GUTS_INIT_TEST):   quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GUTS_INIT_TEST):   *** Append requirements if we have both CR and UR.;
+MPRINT(GUTS_INIT_TEST):   libname ureq xlsx "/biometrics/global/testbpgl/m_dart/draft/cr_m_dart.xlsx";
+NOTE: Libref UREQ was successfully assigned as follows: 
+      Engine:        XLSX 
+      Physical Name: /biometrics/global/testbpgl/m_dart/draft/cr_m_dart.xlsx
+NOTE: APPENDING REQS FROM CHANGE REQUEST REQUIREMENTS FILE /biometrics/global/testbpgl/m_dart/draft/cr_m_dart.xlsx
+MPRINT(GUTS_INIT_TEST):   *** Determine if we are using ur_template or sheet1 worksheet;
+MPRINT(GUTS_INIT_TEST):   proc contents noprint data=ureq._all_ out=__contout;
+MPRINT(GUTS_INIT_TEST):   run;
+
+                                                                    The SAS System
+
+NOTE: The data set WORK.__CONTOUT has 4 observations and 41 variables.
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(GUTS_INIT_TEST):   proc sql noprint;
+MPRINT(GUTS_INIT_TEST):   select 'Y' into :__use_sheet1 from __contout where memname='SHEET1';
+MPRINT(GUTS_INIT_TEST):   select 'Y' into :__use_ur_template from __contout where memname='UR_TEMPLATE';
+NOTE: No rows were selected.
+MPRINT(GUTS_INIT_TEST):   quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: USING SHEET1 WORKSHEET FOR REQUIREMENTS
+MPRINT(GUTS_INIT_TEST):   data __requirements;
+MPRINT(GUTS_INIT_TEST):   set __requirements ureq.sheet1;
+MPRINT(GUTS_INIT_TEST):   run;
+
+NOTE: The import data set has 8 observations and 4 variables.
+NOTE: There were 0 observations read from the data set WORK.__REQUIREMENTS.
+NOTE: There were 8 observations read from the data set UREQ.sheet1.
+NOTE: The data set WORK.__REQUIREMENTS has 8 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GUTS_INIT_TEST):   libname ureq xlsx "/biometrics/global/testbpgl/m_dart/draft/ur_m_dart.xlsx";
+NOTE: Libref UREQ was successfully assigned as follows: 
+      Engine:        XLSX 
+      Physical Name: /biometrics/global/testbpgl/m_dart/draft/ur_m_dart.xlsx
+NOTE: APPENDING REQS FROM USER REQUEST REQUIREMENTS FILE /biometrics/global/testbpgl/m_dart/draft/ur_m_dart.xlsx
+MPRINT(GUTS_INIT_TEST):   *** Determine if we are using ur_template or sheet1 worksheet;
+MPRINT(GUTS_INIT_TEST):   proc contents noprint data=ureq._all_ out=__contout;
+MPRINT(GUTS_INIT_TEST):   run;
+
+NOTE:    Variable Name Change.  UR ID -> UR_ID                           
+NOTE:    Variable Name Change.  User Requirement -> User_Requirement                
+NOTE: The data set WORK.__CONTOUT has 5 observations and 41 variables.
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+                                                                    The SAS System
+
+
+MPRINT(GUTS_INIT_TEST):   proc sql noprint;
+MPRINT(GUTS_INIT_TEST):   select 'Y' into :__use_sheet1 from __contout where memname='SHEET1';
+NOTE: No rows were selected.
+MPRINT(GUTS_INIT_TEST):   select 'Y' into :__use_ur_template from __contout where memname='UR_TEMPLATE';
+MPRINT(GUTS_INIT_TEST):   quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: USING UR_TEMPLATE WORKSHEET FOR REQUIREMENTS
+MPRINT(GUTS_INIT_TEST):   data __requirements;
+MPRINT(GUTS_INIT_TEST):   set __requirements ureq.ur_template;
+NOTE:    Variable Name Change.  UR ID -> UR_ID                           
+NOTE:    Variable Name Change.  User Requirement -> User_Requirement                
+MPRINT(GUTS_INIT_TEST):   run;
+
+NOTE: The import data set has 24 observations and 5 variables.
+NOTE: There were 8 observations read from the data set WORK.__REQUIREMENTS.
+NOTE: There were 24 observations read from the data set UREQ.ur_template.
+NOTE: The data set WORK.__REQUIREMENTS has 32 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+1424      +
+1425      +%include "/biometrics/global/mgarea/utilities/macros/header_check_gt27043a.sas";
+NOTE: %INCLUDE (level 2) file /biometrics/global/mgarea/utilities/macros/header_check_gt27043a.sas is file 
+      /biometrics/global/mgarea/utilities/macros/header_check_gt27043a.sas.
+1426      +/********* start of header *****************************************************************
+1427      +Program Name:	header_check_gt27043a.sas
+1428      +Author: 		Ben Liu (bliu)
+1429      +Description: 	To check macro header deviation from the new standard format for individual programs
+1430      +				to be called by gt23043a.sas
+1431      +
+1432      +Category: 		Utility
+1433      +Macros called:
+1434      +Parameter:      prg: programe name
+1435      +		        path: the path of the program
+1436      +
+1437      +Usage:	        Check macro headers for the following non-conformation;
+1438      +	1. Macro header border text are:  “start of header” “end of header”, all low case letters. No longer like “start of macro header”
+1439      +	   “end of macro header”
+1440      +
+                                                                    The SAS System
+
+1441      +	2. The first line in the header start with “Program Name”, no longer “Macro Name”. For example,
+1442      +       Program Name:  tnfset.sas
+1443      +
+1444      +	3. The ”*” that start each line in the previous macro header (e.g. *  Change History: ) should not exist anymore in the new header
+1445      +
+1446      +	4. The last modified date in the Change History should match the date part of the file datetime stamp to avoid audit issue
+1447      +
+1448      +	5. Make sure the program name is spelled correctly
+1449      +
+1450      +
+1451      +Change History:
+1452      +     2018-05-03  bliu  Original Programmer
+1453      +     2018-07-06  bliu  Modified to be called by gt23043a.sas to check header before printing gt23043a form
+1454      +
+1455      +********* end of header *******************************************************************/
+1456      +
+1457      +
+1458      +%macro header_check_gt27043a (path=, prg=);
+1459      +libname here ".";
+1460      +
+1461      +***Get last modified date of the files from the directory;
+1462      +%dirlist (dir  = &path,
+1463      +          dsn  = dirlist,
+1464      +          keep = dirname filename filesize filedate fileown);
+1465      +
+1466      +data date;
+1467      +	set dirlist;
+1468      +	date_mod=substr(strip(put(filedate, is8601dt.)), 1, 10);
+1469      +	if scan(filename,-1,'.')='sas';
+1470      +	keep filename date_mod;
+1471      +run;
+1472      +
+1473      +***Check header of an individual macro program if both program name and path are specified;
+1474      +%if %length(&prg)>0 and %length(&path)>0 %then %do;
+1475      +
+1476      +	**Import header for check;
+1477      +	data header;
+1478      +		infile "&path/&prg..sas" pad dsd lrecl=32567;
+1479      +    	length line $200;
+1480      +    	len=200;
+1481      +    	input @1 line $varying200. len;
+1482      +		if strip(line) in(' ', '*') then delete;
+1483      +    	counter + 1;
+1484      +		output;
+1485      +		if index(lowcase(line), 'end of header')>0 or index(line, 'end of macro header')>0 then stop;
+1486      +	run;
+                                                                    The SAS System
+
+1487      +
+1488      +	proc sql noprint;
+1489      +		select filename into: filename from date where scan(filename,1,'.')="&prg";
+1490      +		select date_mod into: date_mod from date where scan(filename,1,'.')="&prg";
+1491      +		select max(counter) into: maxline from header;
+1492      +	quit;
+1493      +	%let filename=&filename;
+1494      +	%let date_mode=&date_mod;
+1495      +	%let maxline=&maxline;
+1496      +
+1497      +	***Tag the last modified date;
+1498      +	data header_1;
+1499      +		set header;
+1500      +		if prxmatch("/\d{4}-\d{2}-\d{2}\b/", line)>0 and prxmatch("/\d{2}:\d{2}:\d{2}\b/", line)^>0 then tag + 1;
+1501      +	run;
+1502      +
+1503      +	proc sort data=header_1; where tag>0; by tag; run;
+1504      +	data header_2;
+1505      +		set header_1 end=eof;
+1506      +		by tag;
+1507      +		if first.tag then moddate='Y';
+1508      +		if moddate='Y';
+1509      +	run;
+1510      +
+1511      +	data header_3;
+1512      +		set header_2 end=eof;
+1513      +		if eof then call symputx("lmdateln", counter);
+1514      +	run;
+1515      +	%put lmdateln=&lmdateln;
+1516      +
+1517      +
+1518      +	**Check header and output found issues;
+1519      +	data here.HeaderCheck;
+1520      +			retain counter line filename correct_value;
+1521      +			length filename correct_value $60 last_mdate $11;
+1522      +			set header(drop=len);
+1523      +			filename="&filename";
+1524      +
+1525      +		if not missing(line) then do;
+1526      +			if counter=1 and index(line, 'start of header')<1 then do; correct_value='start of header'; output;end;
+1527      +			if counter=&maxline and index(line, 'end of header')<1 then do; correct_value='end of header'; output;end;
+1528      +			if counter=2 and strip(scan(line, 1, ':'))^='Program Name' then do; correct_value='Program Name'; output;end;
+1529      +
+1530      +			if counter=2 and compress(scan(line, 2, ':'), ' '||'09'x)^=strip(filename) then do;
+1531      +					macro_name=compress(scan(line, 2, ':'), ' '||'09'x);
+1532      +					if index(macro_name, '.')>0 and scan(macro_name, 1, '.')^=strip(scan(filename,1,'.')) then do;
+                                                                    The SAS System
+
+1533      +						correct_value="filename and macro name are not equal"; output; end;
+1534      +					end;
+1535      +
+1536      +			if 1 < counter <&maxline and substr(line, 1, 1)='*' then  do; correct_value='* should be removed'; output;end;
+1537      +
+1538      +			if counter=&lmdateln and prxmatch("/\d{4}-\d{2}-\d{2}\b/", line)>0 then last_mdate=substr(line, anydigit(line), 10);
+1539      +			if not missing(last_mdate) and strip(last_mdate)^=strip("&date_mod") then do; correct_value=strip("&date_mod"); output; end;
+1540      +		end;
+1541      +	run;
+1542      +%end;
+1543      +
+1544      +%mend header_check_gt27043a;
+1545      +
+1546      +
+NOTE: %INCLUDE (level 2) ending.
+NOTE: %INCLUDE (level 1) resuming.
+1547      +%header_check_gt27043a (path=&CURRPATH, prg=&UTILITY);
+MPRINT(HEADER_CHECK_GT27043A):   libname here ".";
+NOTE: Libref HERE refers to the same physical library as OUT.
+NOTE: Libref HERE was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /biometrics/global/testbpgl/m_dart/draft
+MPRINT(HEADER_CHECK_GT27043A):   ***Get last modified date of the files from the directory;
+MAUTOLOCDISPLAY(DIRLIST):  This macro was compiled from the autocall file /biometrics/global/bpgl/v4.19.01/dirlist.sas
+MPRINT(DIRLIST):   filename _dirlst_ pipe "cd /biometrics/global/testbpgl/m_dart/draft; ls -o ""/biometrics/global/testbpgl/m_dart/draft/""";
+MPRINT(DIRLIST):   data dirlist;
+MPRINT(DIRLIST):   keep dirname filename filesize filedate fileown;
+MPRINT(DIRLIST):   attrib dirname length=$200 label="Source Directory Name";
+MPRINT(DIRLIST):   attrib filename length=$200 label="Source File Name";
+MPRINT(DIRLIST):   attrib filesize length=8 label="File Size";
+MPRINT(DIRLIST):   attrib filedate length=8 label="File Date/Time" format=datetime19. informat=datetime19.;
+MPRINT(DIRLIST):   attrib fileown length=$20 label="Owner";
+MPRINT(DIRLIST):   attrib filegrp length=$20 label="Group";
+MPRINT(DIRLIST):   attrib filemode length=$12 label="Mode";
+MPRINT(DIRLIST):   attrib time length=$12 label="Time";
+MPRINT(DIRLIST):   attrib month length=$3 label="Month";
+MPRINT(DIRLIST):   attrib day length=$8 label="Day";
+MPRINT(DIRLIST):   attrib yrortime length=$8 label="Year or Time";
+MPRINT(DIRLIST):   attrib sizordir length=$40 label="Size or <DIR>";
+MPRINT(DIRLIST):   attrib text length=$1024;
+MPRINT(DIRLIST):   array _charlst $ _character_;
+MPRINT(DIRLIST):   array _numlst _numeric_;
+MPRINT(DIRLIST):   retain dirname "/biometrics/global/testbpgl/m_dart/draft/";
+MPRINT(DIRLIST):   infile _dirlst_ lrecl=1024 missover pad;
+MPRINT(DIRLIST):   if ("/" eq "/") then do;
+MPRINT(DIRLIST):   input filemode dummy $ fileown filesize ?? month day yrortime filename ;
+                                                                    The SAS System
+
+MPRINT(DIRLIST):   if (filemode = "total") then delete;
+MPRINT(DIRLIST):   if (index(yrortime,":")) then do;
+MPRINT(DIRLIST):   year = put(year(today()),4.);
+MPRINT(DIRLIST):   time = yrortime;
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   else do;
+MPRINT(DIRLIST):   year = yrortime;
+MPRINT(DIRLIST):   time = "00:00";
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   if input(compress(day||month||year),date9.) > today() then year = put(year(today())-1,4.);
+MPRINT(DIRLIST):   filedate = input(compress(day||month||year||":"||time), datetime19.);
+MPRINT(DIRLIST):   if (filemode =: "d") then filordir = "dir ";
+MPRINT(DIRLIST):   else do;
+MPRINT(DIRLIST):   filename = compress(filename,"*");
+MPRINT(DIRLIST):   filordir = "file";
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   else if ("Linux" in ("WIN_SRV","WINNT","NET_SRV")) then do;
+MPRINT(DIRLIST):   input text $char1024.;
+MPRINT(DIRLIST):   text = left(text);
+MPRINT(DIRLIST):   date = input(text,?? mmddyy10.);
+MPRINT(DIRLIST):   if ( date );
+MPRINT(DIRLIST):   time = substr(text,11,10);
+MPRINT(DIRLIST):   text = substr(text,21);
+MPRINT(DIRLIST):   text = left(text);
+MPRINT(DIRLIST):   sizordir = scan(text,1," ");
+MPRINT(DIRLIST):   text = substr(text,length(sizordir)+1);
+MPRINT(DIRLIST):   filename = left(text);
+MPRINT(DIRLIST):   if (sizordir eq "<DIR>") then filordir = "dir ";
+MPRINT(DIRLIST):   else do;
+MPRINT(DIRLIST):   filordir = "file";
+MPRINT(DIRLIST):   filesize = input(sizordir,?? comma32.);
+MPRINT(DIRLIST):   filedate = input(put(date,date9.)||":"||substr(left(time),1,5)||":00", datetime19.);
+MPRINT(DIRLIST):   if index(upcase(time),"P") then filedate = filedate + 12*60*60;
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   end;
+MPRINT(DIRLIST):   if (filordir eq "file");
+MPRINT(DIRLIST):   run;
+
+NOTE: The infile _DIRLST_ is:
+      Pipe command="cd /biometrics/global/testbpgl/m_dart/draft; ls -o "/biometrics/global/testbpgl/m_dart/draft/""
+
+NOTE: 16 records were read from the infile _DIRLST_.
+      The minimum record length was 9.
+      The maximum record length was 76.
+NOTE: The data set WORK.DIRLIST has 15 observations and 5 variables.
+                                                                    The SAS System
+
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(DIRLIST):   * proc print data=&dsn;
+MPRINT(DIRLIST):   * title "dirlist: Directory Listing of &_dirname_";
+MPRINT(DIRLIST):   * title2 "dirlist: Saved to SAS Data Set %upcase(&dsn)";
+MPRINT(DIRLIST):   * run;
+MPRINT(HEADER_CHECK_GT27043A):  ;
+MPRINT(HEADER_CHECK_GT27043A):   data date;
+MPRINT(HEADER_CHECK_GT27043A):   set dirlist;
+MPRINT(HEADER_CHECK_GT27043A):   date_mod=substr(strip(put(filedate, is8601dt.)), 1, 10);
+MPRINT(HEADER_CHECK_GT27043A):   if scan(filename,-1,'.')='sas';
+MPRINT(HEADER_CHECK_GT27043A):   keep filename date_mod;
+MPRINT(HEADER_CHECK_GT27043A):   run;
+
+NOTE: There were 15 observations read from the data set WORK.DIRLIST.
+NOTE: The data set WORK.DATE has 3 observations and 2 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(HEADER_CHECK_GT27043A):   ***Check header of an individual macro program if both program name and path are specified;
+MPRINT(HEADER_CHECK_GT27043A):   **Import header for check;
+MPRINT(HEADER_CHECK_GT27043A):   data header;
+MPRINT(HEADER_CHECK_GT27043A):   infile "/biometrics/global/testbpgl/m_dart/draft/m_dart.sas" pad dsd lrecl=32567;
+MPRINT(HEADER_CHECK_GT27043A):   length line $200;
+MPRINT(HEADER_CHECK_GT27043A):   len=200;
+MPRINT(HEADER_CHECK_GT27043A):   input @1 line $varying200. len;
+MPRINT(HEADER_CHECK_GT27043A):   if strip(line) in(' ', '*') then delete;
+MPRINT(HEADER_CHECK_GT27043A):   counter + 1;
+MPRINT(HEADER_CHECK_GT27043A):   output;
+MPRINT(HEADER_CHECK_GT27043A):   if index(lowcase(line), 'end of header')>0 or index(line, 'end of macro header')>0 then stop;
+MPRINT(HEADER_CHECK_GT27043A):   run;
+
+NOTE: The infile "/biometrics/global/testbpgl/m_dart/draft/m_dart.sas" is:
+      Filename=/biometrics/global/testbpgl/m_dart/draft/m_dart.sas,
+      Owner Name=mcummings,Group Name=stats,
+      Access Permission=-rwxrwxrwx,
+      Last Modified=12Jun2019:10:28:33,
+      File Size (bytes)=19447
+
+NOTE: 31 records were read from the infile "/biometrics/global/testbpgl/m_dart/draft/m_dart.sas".
+      The minimum record length was 11.
+                                                                    The SAS System
+
+      The maximum record length was 110.
+NOTE: The data set WORK.HEADER has 30 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(HEADER_CHECK_GT27043A):   proc sql noprint;
+MPRINT(HEADER_CHECK_GT27043A):   select filename into: filename from date where scan(filename,1,'.')="m_dart";
+MPRINT(HEADER_CHECK_GT27043A):   select date_mod into: date_mod from date where scan(filename,1,'.')="m_dart";
+MPRINT(HEADER_CHECK_GT27043A):   select max(counter) into: maxline from header;
+MPRINT(HEADER_CHECK_GT27043A):   quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(HEADER_CHECK_GT27043A):   ***Tag the last modified date;
+MPRINT(HEADER_CHECK_GT27043A):   data header_1;
+MPRINT(HEADER_CHECK_GT27043A):   set header;
+MPRINT(HEADER_CHECK_GT27043A):   if prxmatch("/\d{4}-\d{2}-\d{2}\b/", line)>0 and prxmatch("/\d{2}:\d{2}:\d{2}\b/", line)^>0 then tag + 1;
+MPRINT(HEADER_CHECK_GT27043A):   run;
+
+NOTE: There were 30 observations read from the data set WORK.HEADER.
+NOTE: The data set WORK.HEADER_1 has 30 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(HEADER_CHECK_GT27043A):   proc sort data=header_1;
+MPRINT(HEADER_CHECK_GT27043A):   where tag>0;
+MPRINT(HEADER_CHECK_GT27043A):   by tag;
+MPRINT(HEADER_CHECK_GT27043A):   run;
+
+NOTE: There were 21 observations read from the data set WORK.HEADER_1.
+      WHERE tag>0;
+NOTE: SAS sort was used.
+NOTE: The data set WORK.HEADER_1 has 21 observations and 4 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(HEADER_CHECK_GT27043A):   data header_2;
+MPRINT(HEADER_CHECK_GT27043A):   set header_1 end=eof;
+                                                                    The SAS System
+
+MPRINT(HEADER_CHECK_GT27043A):   by tag;
+MPRINT(HEADER_CHECK_GT27043A):   if first.tag then moddate='Y';
+MPRINT(HEADER_CHECK_GT27043A):   if moddate='Y';
+MPRINT(HEADER_CHECK_GT27043A):   run;
+
+NOTE: There were 21 observations read from the data set WORK.HEADER_1.
+NOTE: The data set WORK.HEADER_2 has 9 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(HEADER_CHECK_GT27043A):   data header_3;
+MPRINT(HEADER_CHECK_GT27043A):   set header_2 end=eof;
+MPRINT(HEADER_CHECK_GT27043A):   if eof then call symputx("lmdateln", counter);
+MPRINT(HEADER_CHECK_GT27043A):   run;
+
+NOTE: There were 9 observations read from the data set WORK.HEADER_2.
+NOTE: The data set WORK.HEADER_3 has 9 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+lmdateln=28
+MPRINT(HEADER_CHECK_GT27043A):   **Check header and output found issues;
+MPRINT(HEADER_CHECK_GT27043A):   data here.HeaderCheck;
+MPRINT(HEADER_CHECK_GT27043A):   retain counter line filename correct_value;
+MPRINT(HEADER_CHECK_GT27043A):   length filename correct_value $60 last_mdate $11;
+MPRINT(HEADER_CHECK_GT27043A):   set header(drop=len);
+MPRINT(HEADER_CHECK_GT27043A):   filename="m_dart.sas";
+MPRINT(HEADER_CHECK_GT27043A):   if not missing(line) then do;
+MPRINT(HEADER_CHECK_GT27043A):   if counter=1 and index(line, 'start of header')<1 then do;
+MPRINT(HEADER_CHECK_GT27043A):   correct_value='start of header';
+MPRINT(HEADER_CHECK_GT27043A):   output;
+MPRINT(HEADER_CHECK_GT27043A):  end;
+MPRINT(HEADER_CHECK_GT27043A):   if counter=30 and index(line, 'end of header')<1 then do;
+MPRINT(HEADER_CHECK_GT27043A):   correct_value='end of header';
+MPRINT(HEADER_CHECK_GT27043A):   output;
+MPRINT(HEADER_CHECK_GT27043A):  end;
+MPRINT(HEADER_CHECK_GT27043A):   if counter=2 and strip(scan(line, 1, ':'))^='Program Name' then do;
+MPRINT(HEADER_CHECK_GT27043A):   correct_value='Program Name';
+MPRINT(HEADER_CHECK_GT27043A):   output;
+MPRINT(HEADER_CHECK_GT27043A):  end;
+MPRINT(HEADER_CHECK_GT27043A):   if counter=2 and compress(scan(line, 2, ':'), ' '||'09'x)^=strip(filename) then do;
+MPRINT(HEADER_CHECK_GT27043A):   macro_name=compress(scan(line, 2, ':'), ' '||'09'x);
+                                                                    The SAS System
+
+MPRINT(HEADER_CHECK_GT27043A):   if index(macro_name, '.')>0 and scan(macro_name, 1, '.')^=strip(scan(filename,1,'.')) then do;
+MPRINT(HEADER_CHECK_GT27043A):   correct_value="filename and macro name are not equal";
+MPRINT(HEADER_CHECK_GT27043A):   output;
+MPRINT(HEADER_CHECK_GT27043A):   end;
+MPRINT(HEADER_CHECK_GT27043A):   end;
+MPRINT(HEADER_CHECK_GT27043A):   if 1 < counter <30 and substr(line, 1, 1)='*' then do;
+MPRINT(HEADER_CHECK_GT27043A):   correct_value='* should be removed';
+MPRINT(HEADER_CHECK_GT27043A):   output;
+MPRINT(HEADER_CHECK_GT27043A):  end;
+MPRINT(HEADER_CHECK_GT27043A):   if counter=28 and prxmatch("/\d{4}-\d{2}-\d{2}\b/", line)>0 then last_mdate=substr(line, anydigit(line), 10);
+MPRINT(HEADER_CHECK_GT27043A):   if not missing(last_mdate) and strip(last_mdate)^=strip("2019-06-12         ") then do;
+MPRINT(HEADER_CHECK_GT27043A):   correct_value=strip("2019-06-12         ");
+MPRINT(HEADER_CHECK_GT27043A):   output;
+MPRINT(HEADER_CHECK_GT27043A):   end;
+MPRINT(HEADER_CHECK_GT27043A):   end;
+MPRINT(HEADER_CHECK_GT27043A):   run;
+
+NOTE: There were 30 observations read from the data set WORK.HEADER.
+NOTE: The data set HERE.HEADERCHECK has 0 observations and 6 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+1548      +
+1549      +%macro doit;
+1550      +	**Only print gt23043a form when headercheck has 0 obs;
+1551      +%nobs(here.headercheck);
+1552      +%if &nobs=0 %then %do;
+1553      +	%guts_driver(guts_utility=&utility, guts_folderdt=&progdate);
+1554      +%end;
+1555      +
+1556      +%mend doit;
+1557      +%doit;
+MPRINT(DOIT):   **Only print gt23043a form when headercheck has 0 obs;
+MAUTOLOCDISPLAY(NOBS):  This macro was compiled from the autocall file /biometrics/global/bpgl/v4.19.01/nobs.sas
+MPRINT(DOIT):  ;
+MPRINT(DOIT):  ;
+MPRINT(DOIT):  ;
+MPRINT(DOIT):   ;
+MAUTOLOCDISPLAY(GUTS_DRIVER):  This macro was compiled from the autocall file /biometrics/system_programming/guts/guts_driver.sas
+MPRINT(GUTS_DRIVER):   * TODO: if folderdt is blank then go find most recent;
+GUTS test location is .
+MPRINT(GUTS_DRIVER):   libname testloc ".";
+NOTE: Libref TESTLOC refers to the same physical library as HERE.
+NOTE: Libref TESTLOC was successfully assigned as follows: 
+                                                                    The SAS System
+
+      Engine:        V9 
+      Physical Name: /biometrics/global/testbpgl/m_dart/draft
+GUTS output location is /biometrics/global/testbpgl/m_dart/draft
+GUTS utility is m_dart
+MPRINT(GUTS_DRIVER):   **** find all user requirment programs ur*.sas in test directory;
+MAUTOLOCDISPLAY(GUTS_PIPE):  This macro was compiled from the autocall file /biometrics/system_programming/guts/guts_pipe.sas
+currpath=(/biometrics/global/testbpgl/m_dart/draft) command=(ls -1 ./ur*.sas7bdat)
+MAUTOLOCDISPLAY(LOWCASE):  This macro was compiled from the autocall file /opt/sas/sas94/m3/SASHome/SASFoundation/9.4/sasautos/lowcase.sas
+MPRINT(GUTS_PIPE):   filename gts_pipe pipe "cd /biometrics/global/testbpgl/m_dart/draft; ls -1 ./ur*.sas7bdat";
+MPRINT(GUTS_PIPE):   data m_pipe;
+MPRINT(GUTS_PIPE):   infile gts_pipe truncover end=eof;
+MPRINT(GUTS_PIPE):   retain txtbuf;
+MPRINT(GUTS_PIPE):   length var1 $ 400;
+MPRINT(GUTS_PIPE):   input var1 $ 1-400;
+MPRINT(GUTS_PIPE):   if (var1>' ') then txtbuf = var1;
+MPRINT(GUTS_PIPE):   if (eof) then call symput('guts_pipe', trim(txtbuf));
+MPRINT(GUTS_PIPE):   run;
+
+NOTE: The infile GTS_PIPE is:
+      Pipe command="cd /biometrics/global/testbpgl/m_dart/draft; ls -1 ./ur*.sas7bdat"
+
+NOTE: 2 records were read from the infile GTS_PIPE.
+      The minimum record length was 15.
+      The maximum record length was 15.
+NOTE: The data set WORK.M_PIPE has 2 observations and 2 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GUTS_DRIVER):  ;
+MPRINT(GUTS_DRIVER):   *** iterate through programs, execute them with %include, and append to gt27043a sas dataset;
+MPRINT(GUTS_DRIVER):   data null_;
+MPRINT(GUTS_DRIVER):   set m_pipe;
+MPRINT(GUTS_DRIVER):   length pgmname $50;
+MPRINT(GUTS_DRIVER):   ** isolate program name;
+MPRINT(GUTS_DRIVER):   pgmname=scan(var1,-1,'/');
+MPRINT(GUTS_DRIVER):   pgmname=tranwrd(pgmname,'.sas7bdat','');
+MPRINT(GUTS_DRIVER):   *** redirect LST and LOG to current path if desired;
+MPRINT(GUTS_DRIVER):   *** execute program if desired;
+MPRINT(GUTS_DRIVER):   *** undo redirection if necessary;
+MPRINT(GUTS_DRIVER):   *** append individual test results to get output;
+MPRINT(GUTS_DRIVER):   call execute(cat("proc append base=results data=testloc.",pgmname,"; run;"));
+MPRINT(GUTS_DRIVER):   run;
+
+MPRINT(GUTS_DRIVER):   proc append base=results data=testloc.ur23 ;
+                                                                    The SAS System
+
+MPRINT(GUTS_DRIVER):   run;
+MPRINT(GUTS_DRIVER):   proc append base=results data=testloc.ur24 ;
+MPRINT(GUTS_DRIVER):   run;
+NOTE: There were 2 observations read from the data set WORK.M_PIPE.
+NOTE: The data set WORK.NULL_ has 2 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: CALL EXECUTE generated line.
+1         + proc append base=results data=testloc.ur23                                              ; run;
+
+NOTE: Appending TESTLOC.UR23 to WORK.RESULTS.
+NOTE: BASE data set does not exist. DATA file is being copied to BASE file.
+INFO: Engine's block-read method is in use.
+INFO: Engine's block-write  method is in use.
+NOTE: There were 1 observations read from the data set TESTLOC.UR23.
+NOTE: The data set WORK.RESULTS has 1 observations and 9 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+2         + proc append base=results data=testloc.ur24                                              ; run;
+
+NOTE: Appending TESTLOC.UR24 to WORK.RESULTS.
+ 
+INFO: Engine's fast-append process in use.
+INFO: 13:59:36 Reading DATA file, updating BASE file
+INFO: Starting data set size is 1 pages
+INFO: Engine's block-read method is in use.
+INFO: Engine's block-write  method is in use.
+INFO: Ending data set size is 1 pages, 0 added.
+INFO: 00:00:00 Elapsed time
+INFO: 13:59:36 Finished updating BASE file
+ 
+NOTE: There were 1 observations read from the data set TESTLOC.UR24.
+NOTE: 1 observations added.
+NOTE: The data set WORK.RESULTS has 2 observations and 9 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GUTS_DRIVER):  ;
+                                                                    The SAS System
+
+MPRINT(GUTS_DRIVER):  ;
+MPRINT(GUTS_DRIVER):   ;
+MAUTOLOCDISPLAY(GUTS_GT27043A):  This macro was compiled from the autocall file /biometrics/system_programming/guts/guts_gt27043a.sas
+MPRINT(GUTS_GT27043A):   data guts_27043a;
+MPRINT(GUTS_GT27043A):   set results (rename=(ur_id=cur_id));
+MPRINT(GUTS_GT27043A):   ur_id = input(cur_id, best.);
+MPRINT(GUTS_GT27043A):   comment='';
+MPRINT(GUTS_GT27043A):   run;
+
+NOTE: There were 2 observations read from the data set WORK.RESULTS.
+NOTE: The data set WORK.GUTS_27043A has 2 observations and 11 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GUTS_GT27043A):   proc sort data=guts_27043a;
+MPRINT(GUTS_GT27043A):   by ur_id;
+MPRINT(GUTS_GT27043A):   run;
+
+NOTE: There were 2 observations read from the data set WORK.GUTS_27043A.
+NOTE: SAS sort was used.
+NOTE: The data set WORK.GUTS_27043A has 2 observations and 11 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GUTS_GT27043A):   *** use proc template so we do not have to worry about populate an existing document;
+MPRINT(GUTS_GT27043A):   proc template;
+MPRINT(GUTS_GT27043A):   define style styles.GT27043A;
+MPRINT(GUTS_GT27043A):   parent = styles.rtf;
+MPRINT(GUTS_GT27043A):   style fonts from fonts / 'docFont' = ("Arial", 9 pt) 'TitleFont2' = ("Arial", 9 pt, Bold) 'TitleFont' = ("Arial", 9 pt, 
+Bold);
+MPRINT(GUTS_GT27043A):   end;
+NOTE: STYLE 'Styles.Gt27043a' has been saved to: WORK.TEMPLAT
+NOTE: PROCEDURE TEMPLATE used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(GUTS_GT27043A):   run;
+MPRINT(GUTS_GT27043A):   options ls=132;
+MPRINT(GUTS_GT27043A):   ods listing close;
+MPRINT(GUTS_GT27043A):   ods escapechar='~';
+MPRINT(GUTS_GT27043A):   ods rtf file = 'GT27043A.RTF' style=GT27043A;
+                                                           The SAS System
+
+NOTE: Writing RTF Body file: GT27043A.RTF
+MPRINT(GUTS_GT27043A):   proc report data=guts_27043a;
+MPRINT(GUTS_GT27043A):   title1 j=l "Gilead" j=c "SAS® Utility Program Acceptance Template" j=r "Representative of GT-27043A";
+MPRINT(GUTS_GT27043A):   footnote1 j=c "CONFIDENTIAL INFORMATION";
+MPRINT(GUTS_GT27043A):   footnote2 j=c "Gilead Sciences, Inc . Foster City, CA  94404";
+MPRINT(GUTS_GT27043A):   footnote3 j=r "Page ~{pageof}";
+MPRINT(GUTS_GT27043A):   column utility developer ur_id reqtxt qcprgid qcdate method result comment;
+MPRINT(GUTS_GT27043A):   define utility / "Utility" style={cellwidth=2cm};
+MPRINT(GUTS_GT27043A):   define ur_id / order=data "UR ID" style={cellwidth=1cm};
+MPRINT(GUTS_GT27043A):   define reqtxt / "User Requirement" flow style={cellwidth=4cm};
+MPRINT(GUTS_GT27043A):   define developer / "PDID" style={cellwidth=2cm};
+MPRINT(GUTS_GT27043A):   define qcprgid / "QCPID" style={cellwidth=2cm};
+MPRINT(GUTS_GT27043A):   define qcdate / "QC Date" style={cellwidth=2cm};
+MPRINT(GUTS_GT27043A):   define method / "QC Method" style={cellwidth=2cm};
+MPRINT(GUTS_GT27043A):   define result / "Pass/Fail" style={cellwidth=1.2cm} ;
+MPRINT(GUTS_GT27043A):   define comment / "Exception Comment" style={cellwidth=4cm};
+MPRINT(GUTS_GT27043A):   compute after;
+MPRINT(GUTS_GT27043A):   line @5 "Acceptance";
+MPRINT(GUTS_GT27043A):   line @5 "TL Name(Print):____________________________ 	Signature: ___________________________________   
+Date: ____________" line " ";
+MPRINT(GUTS_GT27043A):   line @5 "Program Date:      20190612";
+MPRINT(GUTS_GT27043A):   line " ";
+MPRINT(GUTS_GT27043A):   line @5 "Deployment: GL ID_________________________	Method _________________  PASS / FAIL           Date: 
+____________";
+MPRINT(GUTS_GT27043A):   line " ";
+MPRINT(GUTS_GT27043A):   line @5 "GL Name(Print):___________________________ 	Signature: _______________________________  Date: 
+____________";
+MPRINT(GUTS_GT27043A):   endcomp;
+MPRINT(GUTS_GT27043A):   run;
+
+NOTE: Multiple concurrent threads will be used to summarize data.
+NOTE: There were 2 observations read from the data set WORK.GUTS_27043A.
+NOTE: PROCEDURE REPORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.02 seconds
+      
+
+MPRINT(GUTS_GT27043A):   ods rtf close;
+MPRINT(GUTS_DRIVER):  ;
+MPRINT(DOIT):  ;
+NOTE: %INCLUDE (level 1) ending.
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           0.70 seconds
+      cpu time            0.37 seconds
+      
+
+Grid Job Id: 717646
